@@ -1,6 +1,7 @@
 ---
 // CrisisBar.astro — pinned below header on EVERY page
-// Mobile: single row with rotating numbers. Desktop: all numbers in one row.
+// Mobile: single compact row, number cycles every 3.5s via JS text-swap.
+// Desktop: all numbers in one row.
 const numbers = [
   { label: "Veterans' Gateway", number: "0808 802 1212", href: "tel:08088021212" },
   { label: "Combat Stress",     number: "0800 138 1619", href: "tel:08001381619" },
@@ -15,27 +16,23 @@ const numbers = [
   aria-label="Crisis support numbers"
   class="bg-crisis-red text-white text-small font-500 w-full z-40"
 >
-  <div class="container-max flex items-center justify-between gap-2 px-4 py-2">
+  <div class="container-max flex items-center gap-2 px-4 py-2">
 
-    <!-- MOBILE: single row with rotating number -->
-    <div class="flex sm:hidden items-center gap-2 min-w-0 flex-1" id="crisis-bar-content">
+    <!-- MOBILE: single row, number text rotates -->
+    <div class="flex sm:hidden items-center gap-2 min-w-0 flex-1 overflow-hidden" id="crisis-bar-content">
       <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
         <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
       </svg>
-      <span class="font-600 whitespace-nowrap flex-shrink-0">In crisis?</span>
-      <span class="text-white/50 flex-shrink-0" aria-hidden="true">·</span>
-      <div class="relative flex-1 overflow-hidden" style="height:1.4em;" aria-live="polite" aria-atomic="true">
-        {numbers.map((n, i) => (
-          <a
-            href={n.href}
-            data-crisis-item
-            class={`crisis-number absolute inset-0 flex items-center text-white underline hover:text-white/80 whitespace-nowrap transition-opacity duration-500 ${i === 0 ? 'opacity-100' : 'opacity-0'}`}
-          >
-            {n.label} <strong class="ml-1">{n.number}</strong>
-          </a>
-        ))}
-      </div>
-      <a href="/crisis" class="text-white underline hover:text-white/80 whitespace-nowrap font-600 flex-shrink-0 ml-1">More →</a>
+      <a
+        id="crisis-rotator-link"
+        href={numbers[0].href}
+        class="text-white underline truncate flex-1 min-w-0"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span id="crisis-rotator-text">{numbers[0].label} {numbers[0].number}</span>
+      </a>
+      <a href="/crisis" class="text-white underline whitespace-nowrap flex-shrink-0 font-600">More →</a>
     </div>
 
     <!-- DESKTOP: all numbers in one row -->
@@ -44,7 +41,7 @@ const numbers = [
         <path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
       </svg>
       <span class="font-600">In crisis or out of hours?</span>
-      <span class="hidden sm:inline" aria-hidden="true">·</span>
+      <span aria-hidden="true">·</span>
       <span class="flex flex-wrap gap-x-3 gap-y-1 items-center">
         {numbers.map((n, i) => (
           <>
@@ -58,13 +55,13 @@ const numbers = [
       <a href="/crisis" class="text-white underline hover:text-white/80 whitespace-nowrap font-600 ml-2">More help →</a>
     </div>
 
-    <!-- Collapse toggle (both breakpoints) -->
+    <!-- Collapse toggle -->
     <button
       id="crisis-bar-toggle"
       aria-expanded="true"
       aria-controls="crisis-bar-content crisis-bar-content-desktop"
       aria-label="Collapse crisis information bar"
-      class="flex-shrink-0 text-white/80 hover:text-white p-1 rounded focus-visible:ring-2 focus-visible:ring-white ml-2"
+      class="flex-shrink-0 text-white/80 hover:text-white p-1 rounded focus-visible:ring-2 focus-visible:ring-white"
       style="min-height: unset;"
     >
       <svg id="crisis-bar-chevron" class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -77,12 +74,20 @@ const numbers = [
 
 <script>
   (function () {
-    const bar            = document.getElementById('crisis-bar');
+    const numbers = [
+      { label: "Veterans' Gateway", number: "0808 802 1212", href: "tel:08088021212" },
+      { label: "Combat Stress",     number: "0800 138 1619", href: "tel:08001381619" },
+      { label: "Samaritans",        number: "116 123",       href: "tel:116123" },
+      { label: "Emergency",         number: "999",            href: "tel:999" },
+    ];
+
     const contentMobile  = document.getElementById('crisis-bar-content');
     const contentDesktop = document.getElementById('crisis-bar-content-desktop');
     const toggle         = document.getElementById('crisis-bar-toggle');
     const chevron        = document.getElementById('crisis-bar-chevron');
-    if (!bar || !contentMobile || !contentDesktop || !toggle || !chevron) return;
+    const rotatorLink    = document.getElementById('crisis-rotator-link') as HTMLAnchorElement | null;
+    const rotatorText    = document.getElementById('crisis-rotator-text');
+    if (!contentMobile || !contentDesktop || !toggle || !chevron) return;
 
     const STORAGE_KEY = 'civdiv-crisis-bar-collapsed';
 
@@ -104,22 +109,20 @@ const numbers = [
       }
     }
 
-    if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-      setCollapsed(true);
-    }
+    if (sessionStorage.getItem(STORAGE_KEY) === '1') setCollapsed(true);
 
     toggle.addEventListener('click', () => {
       setCollapsed(contentMobile.style.display === 'none' ? false : true);
     });
 
-    // Rotate numbers on mobile
-    const items = Array.from(document.querySelectorAll<HTMLElement>('[data-crisis-item]'));
-    if (items.length > 1) {
+    // Rotate number text on mobile
+    if (rotatorLink && rotatorText) {
       let current = 0;
       setInterval(() => {
-        items[current].style.opacity = '0';
-        current = (current + 1) % items.length;
-        items[current].style.opacity = '1';
+        current = (current + 1) % numbers.length;
+        const n = numbers[current];
+        rotatorText.textContent = n.label + ' ' + n.number;
+        rotatorLink.href = n.href;
       }, 3500);
     }
   })();
