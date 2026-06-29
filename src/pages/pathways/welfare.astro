@@ -1,0 +1,52 @@
+---
+// Welfare & Social Isolation pathway (/pathways/welfare)
+import PathwayLayout from '../../layouts/PathwayLayout.astro';
+---
+
+<PathwayLayout
+  title="Welfare & Social Isolation Support"
+  description="CivDivCIC connects veterans to welfare support, community activities, befriending and peer support to combat social isolation. No Wrong Door, London."
+  pathwayName="Welfare & Social Isolation"
+  icon="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75"
+  iconLabel="Welfare and community icon"
+  promise="We connect veterans to community, peer support and activities that build belonging and reduce isolation."
+  whatWeHelp={[
+    'Connecting isolated veterans to community groups and social activities',
+    'Befriending programmes — one-to-one regular contact with a volunteer',
+    'Peer support networks for veterans with shared experiences',
+    'Welfare checks for veterans who are hard to reach or have no next of kin',
+    'Support for veterans with caring responsibilities',
+    'Connecting veterans to cultural and heritage community groups',
+  ]}
+  partnerCards={[
+    {
+      name: 'West Indian Association of Service Personnel (WASP)',
+      description: 'Primary CivDivCIC partner. Provides community events, peer networks and cultural connection for Caribbean and Commonwealth veterans.',
+      funded: true,
+      website: 'https://www.wasp.org.uk',
+    },
+    {
+      name: 'Windrush Foundation',
+      description: 'Heritage and welfare support for Caribbean communities in the UK, including veterans and their families.',
+      funded: true,
+      website: '#TODO[CONFIRM]',
+    },
+    {
+      name: 'Veterans\' Gateway',
+      description: 'Can connect isolated veterans to local support groups, befriending services and welfare organisations.',
+      funded: false,
+      website: 'https://www.veteransgateway.org.uk',
+    },
+    {
+      name: 'SSAFA',
+      description: 'Welfare visits and practical support for veterans at risk of social isolation, including those in hospital or care.',
+      funded: false,
+      website: 'https://www.ssafa.org.uk',
+    },
+  ]}
+  relatedPathways={[
+    { name: 'Mental Wellbeing', href: '/pathways/mental-wellbeing', icon: 'M9 9a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3H3m6 0v6' },
+    { name: 'Health & Wellbeing', href: '/pathways/health', icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M12 8v8m-4-4h8' },
+    { name: 'Heritage & WASP', href: '/heritage', icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' },
+  ]}
+/>

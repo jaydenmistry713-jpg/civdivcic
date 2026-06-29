@@ -1,0 +1,171 @@
+---
+// Contact & Visit (/contact) — REQ-4.2
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact & Visit"
+  description="Contact CivDivCIC — 4th Floor, Silverstream House, 45 Fitzroy Street, Fitzrovia, London W1T 6EB. Email admin@civdivcic.org.uk. General enquiry form available."
+>
+
+  <!-- Hero -->
+  <section class="bg-brand-black section-padding py-12 md:py-16" aria-labelledby="contact-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="contact-heading" class="font-heading font-800 text-white heading-rule mb-4">Contact & Visit</h1>
+      <p class="text-white/70 text-base leading-relaxed max-w-xl">
+        We are here to listen. Whether you need support, want to make a referral or just want to ask a question, please get in touch.
+      </p>
+      <div class="mt-6 bg-gold/10 border border-gold/30 rounded-card p-4">
+        <p class="text-white/80 text-sm leading-relaxed">
+          <strong class="text-gold">Important:</strong> This website complements our physical centre — it does not replace in-person support. If you are in crisis, please <a href="/crisis" class="text-gold-tint underline">visit our crisis page</a> for 24/7 numbers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-white section-padding" aria-label="Contact information and form">
+    <div class="container-max max-w-5xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+        <!-- Left: Contact details + map -->
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-6">Find us</h2>
+
+          <address class="not-italic space-y-5 mb-8">
+            <div class="flex gap-3 items-start">
+              <div class="w-9 h-9 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-600 text-brand-black text-sm mb-0.5">Address</p>
+                <p class="text-black/70 text-sm leading-relaxed">
+                  4th Floor, Silverstream House<br/>
+                  45 Fitzroy Street, Fitzrovia<br/>
+                  London W1T 6EB
+                </p>
+                <a
+                  href="https://maps.google.com/?q=45+Fitzroy+Street+London+W1T+6EB"
+                  class="text-gold-dark text-xs font-500 hover:underline mt-1 inline-block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open in Google Maps →
+                </a>
+              </div>
+            </div>
+
+            <div class="flex gap-3 items-start">
+              <div class="w-9 h-9 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-600 text-brand-black text-sm mb-0.5">Email</p>
+                <a href="mailto:admin@civdivcic.org.uk" class="text-gold-dark text-sm font-500 hover:underline">admin@civdivcic.org.uk</a>
+              </div>
+            </div>
+
+            <div class="flex gap-3 items-start">
+              <div class="w-9 h-9 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-600 text-brand-black text-sm mb-0.5">Telephone</p>
+                <p class="text-black/50 text-sm italic">TODO[CONFIRM]</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 items-start">
+              <div class="w-9 h-9 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-600 text-brand-black text-sm mb-0.5">Opening hours</p>
+                <p class="text-black/50 text-sm italic">TODO[CONFIRM]</p>
+              </div>
+            </div>
+          </address>
+
+          <!-- Map embed placeholder -->
+          <div class="rounded-card overflow-hidden bg-warm-surface border border-black/[0.06] min-h-[260px] flex items-center justify-center" aria-label="Map location placeholder">
+            <div class="text-center px-8">
+              <svg class="w-8 h-8 text-black/20 mx-auto mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              <p class="text-black/30 text-sm italic">Map embed — TODO[add Google Maps or OpenStreetMap embed for 45 Fitzroy Street, London W1T 6EB]</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: General enquiry form -->
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-2">General enquiry</h2>
+          <p class="text-black/60 text-sm mb-6 leading-relaxed">
+            For non-sensitive general enquiries only. Do not include personal medical, legal or financial details in this form. For support or referrals, please <a href="/referral" class="text-gold-dark hover:underline font-500">use the referral form</a>.
+          </p>
+
+          <!-- Netlify Forms — general enquiry (low-sensitivity only) -->
+          <form
+            name="general-enquiry"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            class="space-y-5"
+            aria-label="General enquiry form"
+          >
+            <input type="hidden" name="form-name" value="general-enquiry" />
+            <p class="hidden" aria-hidden="true"><label>Do not fill: <input name="bot-field" /></label></p>
+
+            <div>
+              <label for="enquiry-name" class="form-label">Full name <span class="text-crisis-red" aria-label="required">*</span></label>
+              <input type="text" id="enquiry-name" name="name" required autocomplete="name" class="form-input" placeholder="Your name" />
+            </div>
+
+            <div>
+              <label for="enquiry-email" class="form-label">Email address <span class="text-crisis-red" aria-label="required">*</span></label>
+              <input type="email" id="enquiry-email" name="email" required autocomplete="email" class="form-input" placeholder="your@email.com" />
+            </div>
+
+            <div>
+              <label for="enquiry-subject" class="form-label">Subject <span class="text-crisis-red" aria-label="required">*</span></label>
+              <select id="enquiry-subject" name="subject" required class="form-input">
+                <option value="">— Select a subject —</option>
+                <option value="general">General question</option>
+                <option value="partnership">Partnership enquiry</option>
+                <option value="volunteer">Volunteering</option>
+                <option value="media">Media / press</option>
+                <option value="feedback">Feedback</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="enquiry-message" class="form-label">Message <span class="text-crisis-red" aria-label="required">*</span></label>
+              <textarea id="enquiry-message" name="message" required rows="5" maxlength="1000" class="form-textarea" placeholder="Your message (max 1000 characters)"></textarea>
+              <p class="text-black/40 text-xs mt-1">Do not include personal medical, legal or financial details here.</p>
+            </div>
+
+            <div class="bg-warm-surface rounded-lg p-3 border border-black/[0.08]">
+              <p class="text-xs text-black/50">
+                This site is protected by reCAPTCHA.
+                <a href="https://policies.google.com/privacy" class="text-gold-dark hover:underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a> ·
+                <a href="https://policies.google.com/terms" class="text-gold-dark hover:underline" target="_blank" rel="noopener noreferrer">Terms</a>.
+                Your enquiry will be handled under our <a href="/policies#privacy" class="text-gold-dark hover:underline">Privacy Notice</a>.
+              </p>
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-4 rounded-lg font-600 text-base">Send enquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

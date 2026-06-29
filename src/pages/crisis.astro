@@ -1,0 +1,144 @@
+---
+// Crisis / Need Help Now (/crisis) — REQ-1.3
+// Plain, calm page. Numbers visible without scrolling.
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="If you need help right now"
+  description="In crisis or need help now? Call Veterans' Gateway 0808 802 1212, Combat Stress 0800 138 1619, Samaritans 116 123, or Emergency 999. All lines 24/7 and free."
+>
+
+  <!-- Reassuring hero — no scrolling required to see numbers -->
+  <section class="bg-brand-black min-h-screen flex flex-col justify-start pt-8 pb-16 px-4 md:px-8" aria-labelledby="crisis-heading">
+    <div class="container-max max-w-3xl">
+
+      <!-- H1 -->
+      <h1 id="crisis-heading" class="font-heading font-800 text-white text-h1-mobile md:text-h1-desktop mb-3">
+        If you need help right now
+      </h1>
+      <p class="text-white/70 text-base mb-8 max-w-xl leading-relaxed">
+        You don't have to face this alone. The lines below are free, confidential and available around the clock. Please call.
+      </p>
+
+      <!-- Immediate danger — bold red box -->
+      <div class="border-2 border-crisis-red rounded-card p-5 mb-8 bg-crisis-red/10" role="alert" aria-live="assertive">
+        <p class="font-heading font-800 text-white text-lg">
+          In immediate danger?
+        </p>
+        <p class="text-white/80 mt-1 mb-3">If you or someone else is in immediate danger, call the emergency services now.</p>
+        <a
+          href="tel:999"
+          class="btn-crisis px-8 py-4 rounded-lg text-xl font-800 inline-flex items-center gap-3"
+          aria-label="Call emergency services — 999"
+        >
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72"/>
+          </svg>
+          Call 999
+        </a>
+      </div>
+
+      <!-- In-hours centre -->
+      <div class="bg-black-800 rounded-card p-5 mb-6 border border-white/10">
+        <h2 class="font-heading font-600 text-gold mb-2">During centre hours</h2>
+        <p class="text-white/70 text-sm mb-3">
+          Centre hours: <span class="text-white/50 italic">TODO[CONFIRM]</span> · 4th Floor, Silverstream House, 45 Fitzroy Street, London W1T 6EB
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="tel:TODO[CONFIRM]" class="btn-primary px-6 py-3 rounded-lg text-sm font-600" aria-label="Call the centre — TODO confirm number">
+            Call the centre — TODO[CONFIRM]
+          </a>
+          <a href="/contact" class="btn-secondary-light px-6 py-3 rounded-lg text-sm font-600">Visit us</a>
+        </div>
+      </div>
+
+      <!-- 24/7 crisis lines -->
+      <h2 class="font-heading font-700 text-white text-xl mb-4">24/7 free crisis lines</h2>
+      <p class="text-white/60 text-sm mb-6">All calls are free from mobiles and landlines. You can talk or just listen.</p>
+
+      <div class="flex flex-col gap-4 mb-10">
+        {[
+          {
+            name: "Veterans' Gateway",
+            number: '0808 802 1212',
+            tel: '08088021212',
+            desc: "First point of contact for veterans — trained staff, 24 hours a day, 7 days a week.",
+            badge: '24/7',
+          },
+          {
+            name: 'Combat Stress',
+            number: '0800 138 1619',
+            tel: '08001381619',
+            desc: 'Specialist support for veterans with mental health difficulties from their military service.',
+            badge: '24/7',
+          },
+          {
+            name: 'Samaritans',
+            number: '116 123',
+            tel: '116123',
+            desc: 'Free, confidential listening service available around the clock — not just for crisis.',
+            badge: '24/7 · Free',
+          },
+          {
+            name: 'NHS 111',
+            number: '111',
+            tel: '111',
+            desc: 'Non-emergency medical advice. Call if you need medical help but it is not an emergency.',
+            badge: '24/7',
+          },
+        ].map(line => (
+          <a
+            href={`tel:${line.tel}`}
+            class="flex items-center justify-between gap-4 bg-black-800 border border-white/10 hover:border-gold/40 hover:bg-white/5 rounded-card p-5 no-underline transition-all group"
+            aria-label={`Call ${line.name} on ${line.number}`}
+          >
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="font-heading font-700 text-white text-base group-hover:text-gold transition-colors">{line.name}</span>
+                <span class="text-[10px] font-600 bg-open-green/20 text-open-green px-2 py-0.5 rounded-full uppercase tracking-wide">{line.badge}</span>
+              </div>
+              <p class="text-white/50 text-sm leading-relaxed">{line.desc}</p>
+            </div>
+            <div class="flex-shrink-0 text-right">
+              <div class="font-heading font-800 text-gold text-xl group-hover:text-gold-tint transition-colors">{line.number}</div>
+              <div class="flex items-center gap-1 text-white/40 text-xs mt-0.5 justify-end" aria-hidden="true">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
+                Tap to call
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- What to expect when you call -->
+      <div class="bg-black-800 rounded-card p-6 border border-white/10">
+        <h2 class="font-heading font-600 text-white mb-4">What to expect when you call</h2>
+        <ul class="space-y-3">
+          {[
+            'You will speak to a trained, empathetic person — not a machine.',
+            'Calls are free from mobiles and landlines. They will not appear on most itemised bills.',
+            'You can remain anonymous. You do not have to give your name.',
+            'You can hang up at any time. There is no pressure to keep talking.',
+            'If you find it hard to talk, many services also offer text and online chat alternatives.',
+          ].map(item => (
+            <li class="flex gap-3 items-start text-white/70 text-sm leading-relaxed">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Back to support -->
+      <div class="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4">
+        <a href="/support" class="btn-secondary-light px-6 py-3 rounded-lg text-sm font-600">Explore all support pathways</a>
+        <a href="/referral" class="btn-secondary-light px-6 py-3 rounded-lg text-sm font-600">Make a referral</a>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

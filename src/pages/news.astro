@@ -1,0 +1,59 @@
+---
+// News & Events stub (/news)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('news').catch(() => []);
+const published = allNews
+  .filter(n => n.data.published !== false)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="News & Events"
+  description="The latest news and events from CivDivCIC — updates on our work, partner events and community activities."
+>
+
+  <section class="bg-brand-black section-padding py-12" aria-labelledby="news-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="news-heading" class="font-heading font-800 text-white heading-rule mb-4">News & Events</h1>
+      <p class="text-white/70 text-base leading-relaxed">Updates from CivDivCIC, our partners, and the veteran community.</p>
+    </div>
+  </section>
+
+  <section class="section-white section-padding" aria-label="News articles">
+    <div class="container-max max-w-4xl">
+      {published.length === 0 ? (
+        <div class="text-center py-16">
+          <p class="text-black/50 text-base mb-4">No articles published yet. Check back soon.</p>
+          <a href="/contact" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex">Get in touch</a>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {published.map(article => (
+            <article class="card reveal">
+              {article.data.image && (
+                <img
+                  src={article.data.image}
+                  alt=""
+                  class="rounded-lg mb-4 w-full h-48 object-cover"
+                  loading="lazy"
+                  aria-hidden="true"
+                />
+              )}
+              <time class="text-black/40 text-xs font-500" datetime={article.data.date.toISOString()}>
+                {article.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </time>
+              <h2 class="font-heading font-700 text-brand-black text-h3-mobile mt-1 mb-2">{article.data.title}</h2>
+              {article.data.excerpt && <p class="text-black/60 text-sm leading-relaxed flex-1">{article.data.excerpt}</p>}
+              <a href={`/news/${article.slug}`} class="text-gold-dark font-600 text-sm mt-4 hover:underline no-underline inline-flex">
+                Read more →
+              </a>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+</BaseLayout>

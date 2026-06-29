@@ -1,0 +1,629 @@
+---
+// Referral Hub (/referral) — REQ-1.4, REQ-2.2
+// Multi-step form. Submits to /.netlify/functions/submit-referral — NOT Netlify Forms.
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Make a Referral"
+  description="Submit a referral for veteran support. Our team reviews all referrals within 2 working days. Your data is stored securely under UK GDPR."
+>
+
+  <section class="bg-brand-black section-padding py-12" aria-label="Referral form introduction">
+    <div class="container-max max-w-3xl">
+      <h1 class="font-heading font-800 text-white heading-rule mb-4">Make a Referral</h1>
+      <p class="text-white/70 text-base leading-relaxed max-w-xl">
+        Whether you're a veteran seeking support, a professional referring a client, or a family member asking on behalf of someone, we're here to help — No Wrong Door.
+      </p>
+      <p class="text-white/50 text-sm mt-3">
+        Our team reviews all referrals within 2 working days. Your data is stored securely in the UK under DPA 2018 / UK GDPR and never shared without your consent.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-white section-padding" aria-labelledby="referral-form-heading">
+    <div class="container-max max-w-2xl">
+      <h2 id="referral-form-heading" class="sr-only">Referral form</h2>
+
+      <!-- Referral type toggle -->
+      <div class="mb-8">
+        <p class="font-body font-600 text-brand-black mb-3 text-sm">I am:</p>
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Referral type">
+          <button
+            type="button"
+            data-referral-type="self"
+            class="referral-type-btn btn px-5 py-2.5 rounded-lg text-sm font-600 border-2 border-gold bg-gold text-brand-black"
+            aria-pressed="true"
+          >
+            A veteran (self-referral)
+          </button>
+          <button
+            type="button"
+            data-referral-type="behalf"
+            class="referral-type-btn btn px-5 py-2.5 rounded-lg text-sm font-600 border-2 border-black/20 bg-transparent text-brand-black hover:border-gold/50"
+            aria-pressed="false"
+          >
+            Referring someone
+          </button>
+          <button
+            type="button"
+            data-referral-type="professional"
+            class="referral-type-btn btn px-5 py-2.5 rounded-lg text-sm font-600 border-2 border-black/20 bg-transparent text-brand-black hover:border-gold/50"
+            aria-pressed="false"
+          >
+            A professional
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress indicator -->
+      <div class="mb-8" role="status" aria-live="polite" aria-label="Form progress">
+        <div class="flex items-center gap-0">
+          {[1, 2, 3, 4].map((n) => (
+            <div class="flex items-center flex-1">
+              <div
+                class:list={[
+                  'w-8 h-8 rounded-full flex items-center justify-center text-sm font-700 transition-colors flex-shrink-0',
+                  n === 1 ? 'bg-gold text-brand-black' : 'bg-black/10 text-black/40',
+                ]}
+                id={`step-indicator-${n}`}
+                aria-label={`Step ${n}`}
+              >
+                {n}
+              </div>
+              {n < 4 && <div class="flex-1 h-0.5 bg-black/10 mx-1" id={`step-line-${n}`}></div>}
+            </div>
+          ))}
+        </div>
+        <div class="flex justify-between mt-2 text-[11px] text-black/50 font-500">
+          <span>About you</span>
+          <span>What's needed</span>
+          <span>About you (optional)</span>
+          <span>Consent</span>
+        </div>
+        <p class="text-sm text-black/60 mt-3">
+          Step <span id="current-step-label">1</span> of 4 — <span id="current-step-name">About you / them</span>
+        </p>
+      </div>
+
+      <!-- THE FORM -->
+      <form
+        id="referral-form"
+        novalidate
+        aria-label="Veteran referral form"
+      >
+        <!-- Step 1: About you/them -->
+        <div id="step-1" class="form-step space-y-5">
+          <h3 class="font-heading font-600 text-brand-black text-xl mb-1">About you / them</h3>
+          <p class="text-black/60 text-sm mb-6">We need at least a name and one way to contact you. All other fields help us connect you to the right support faster.</p>
+
+          <div>
+            <label for="full-name" class="form-label">Full name <span class="text-crisis-red" aria-label="required">*</span></label>
+            <input
+              type="text"
+              id="full-name"
+              name="name"
+              autocomplete="name"
+              required
+              maxlength="200"
+              placeholder="e.g. James Williams"
+              class="form-input"
+              aria-required="true"
+              aria-describedby="full-name-hint"
+            />
+            <p id="full-name-hint" class="text-black/40 text-xs mt-1">Full name of the person seeking support.</p>
+          </div>
+
+          <div>
+            <label for="contact-phone" class="form-label">Contact phone <span class="text-black/40 text-xs font-400">(required if no email)</span></label>
+            <input
+              type="tel"
+              id="contact-phone"
+              name="contact_phone"
+              autocomplete="tel"
+              maxlength="20"
+              placeholder="e.g. 07700 900123"
+              class="form-input"
+              aria-describedby="phone-hint"
+            />
+            <p id="phone-hint" class="text-black/40 text-xs mt-1">UK or international number. Not shared externally without consent.</p>
+          </div>
+
+          <div>
+            <label for="contact-email" class="form-label">Contact email <span class="text-black/40 text-xs font-400">(required if no phone)</span></label>
+            <input
+              type="email"
+              id="contact-email"
+              name="contact_email"
+              autocomplete="email"
+              maxlength="254"
+              placeholder="e.g. james.w@example.com"
+              class="form-input"
+            />
+          </div>
+
+          <div>
+            <label for="area" class="form-label">Area / outward postcode <span class="text-crisis-red" aria-label="required">*</span></label>
+            <input
+              type="text"
+              id="area"
+              name="area"
+              required
+              maxlength="10"
+              placeholder="e.g. W1T or SW1A"
+              class="form-input"
+              aria-required="true"
+              aria-describedby="area-hint"
+            />
+            <p id="area-hint" class="text-black/40 text-xs mt-1">Outward code only (first part of postcode) — helps us match you to local services.</p>
+          </div>
+
+          <div>
+            <label for="description" class="form-label">Brief description <span class="text-black/40 text-xs font-400">(optional)</span></label>
+            <textarea
+              id="description"
+              name="description"
+              maxlength="500"
+              rows="4"
+              placeholder="In your own words — what's the main thing you'd like help with? (500 characters max)"
+              class="form-textarea"
+              aria-describedby="desc-hint"
+            ></textarea>
+            <p id="desc-hint" class="text-black/40 text-xs mt-1">
+              Optional. <span id="desc-count">0</span>/500 characters. Do not include sensitive medical or legal information here.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2: What's needed -->
+        <div id="step-2" class="form-step hidden space-y-5">
+          <h3 class="font-heading font-600 text-brand-black text-xl mb-1">What support is needed?</h3>
+          <p class="text-black/60 text-sm mb-6">Select all that apply. You must choose at least one.</p>
+
+          <fieldset>
+            <legend class="form-label mb-3">Support areas <span class="text-crisis-red" aria-label="required">*</span></legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { id: 'pillar-health',    value: 'health',    label: 'Health & Wellbeing' },
+                { id: 'pillar-housing',   value: 'housing',   label: 'Housing' },
+                { id: 'pillar-employment',value: 'employment',label: 'Employment & Skills' },
+                { id: 'pillar-financial', value: 'financial', label: 'Financial Guidance & Benefits' },
+                { id: 'pillar-welfare',   value: 'welfare',   label: 'Welfare & Social Isolation' },
+                { id: 'pillar-mental',    value: 'mental_wellbeing', label: 'Mental Wellbeing' },
+              ].map(p => (
+                <label class="flex items-center gap-3 bg-warm-surface border border-black/[0.08] hover:border-gold/40 rounded-card p-4 cursor-pointer transition-colors pillar-label" style="min-height: unset;">
+                  <input type="checkbox" name="pillars" value={p.value} id={p.id} class="w-5 h-5 accent-[#a6b84c] flex-shrink-0" style="min-height: unset;" />
+                  <span class="font-body font-500 text-brand-black text-sm">{p.label}</span>
+                </label>
+              ))}
+            </div>
+            <p id="pillars-error" class="form-error hidden mt-2" role="alert">Please select at least one support area.</p>
+          </fieldset>
+        </div>
+
+        <!-- Step 3: Optional demographics -->
+        <div id="step-3" class="form-step hidden space-y-6">
+          <h3 class="font-heading font-600 text-brand-black text-xl mb-1">Optional information</h3>
+          <p class="text-black/60 text-sm mb-4">
+            This information helps us understand and report on who we're reaching. Every option includes "Prefer not to say" — this section is entirely optional.
+          </p>
+
+          <div>
+            <label for="veteran-status" class="form-label">Veteran status</label>
+            <select id="veteran-status" name="veteran_status" class="form-input">
+              <option value="">— Select —</option>
+              <option value="uk_af">UK Armed Forces veteran</option>
+              <option value="commonwealth">Commonwealth Armed Forces veteran</option>
+              <option value="foreign_national">Foreign national veteran</option>
+              <option value="gurkha">Gurkha veteran</option>
+              <option value="serving">Currently serving</option>
+              <option value="family">Family member of veteran</option>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="age-band" class="form-label">Age band</label>
+            <select id="age-band" name="age_band" class="form-input">
+              <option value="">— Select —</option>
+              <option value="under_25">Under 25</option>
+              <option value="25_34">25–34</option>
+              <option value="35_44">35–44</option>
+              <option value="45_54">45–54</option>
+              <option value="55_64">55–64</option>
+              <option value="65_plus">65+</option>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="ethnicity" class="form-label">Ethnicity</label>
+            <select id="ethnicity" name="ethnicity" class="form-input">
+              <option value="">— Select —</option>
+              <optgroup label="Asian or Asian British">
+                <option value="asian_indian">Indian</option>
+                <option value="asian_pakistani">Pakistani</option>
+                <option value="asian_bangladeshi">Bangladeshi</option>
+                <option value="asian_chinese">Chinese</option>
+                <option value="asian_other">Any other Asian background</option>
+              </optgroup>
+              <optgroup label="Black, African, Caribbean or Black British">
+                <option value="black_african">African</option>
+                <option value="black_caribbean">Caribbean</option>
+                <option value="black_other">Any other Black, African or Caribbean background</option>
+              </optgroup>
+              <optgroup label="Mixed or Multiple ethnic groups">
+                <option value="mixed_white_black_caribbean">White and Black Caribbean</option>
+                <option value="mixed_white_black_african">White and Black African</option>
+                <option value="mixed_white_asian">White and Asian</option>
+                <option value="mixed_other">Any other Mixed or Multiple ethnic background</option>
+              </optgroup>
+              <optgroup label="White">
+                <option value="white_english">English, Welsh, Scottish, Northern Irish or British</option>
+                <option value="white_irish">Irish</option>
+                <option value="white_gypsy">Gypsy or Irish Traveller</option>
+                <option value="white_other">Any other White background</option>
+              </optgroup>
+              <optgroup label="Other ethnic group">
+                <option value="other_arab">Arab</option>
+                <option value="other_other">Any other ethnic group</option>
+              </optgroup>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+
+          <fieldset>
+            <legend class="form-label mb-3">Cohort identification (select all that apply)</legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { id: 'cohort-commonwealth', value: 'commonwealth', label: 'Commonwealth veteran' },
+                { id: 'cohort-caribbean',    value: 'caribbean',    label: 'Caribbean veteran' },
+                { id: 'cohort-foreign',      value: 'foreign_national', label: 'Foreign national veteran' },
+                { id: 'cohort-gurkha',       value: 'gurkha',       label: 'Gurkha veteran' },
+                { id: 'cohort-family',       value: 'family',       label: 'Family member' },
+                { id: 'cohort-pns',          value: 'prefer_not',   label: 'Prefer not to say' },
+              ].map(c => (
+                <label class="flex items-center gap-3 bg-warm-surface border border-black/[0.08] rounded-card p-3 cursor-pointer text-sm" style="min-height: unset;">
+                  <input type="checkbox" name="cohort_flags" value={c.value} id={c.id} class="w-4 h-4 accent-[#a6b84c]" style="min-height: unset;" />
+                  <span class="font-body font-500 text-brand-black">{c.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Step 4: Consent -->
+        <div id="step-4" class="form-step hidden space-y-6">
+          <h3 class="font-heading font-600 text-brand-black text-xl mb-1">Consent & submission</h3>
+
+          <!-- Just-in-time privacy note -->
+          <div class="bg-warm-surface rounded-card p-4 border border-gold/20 flex gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <p class="text-sm text-black/70 leading-relaxed">
+              <strong class="text-brand-black">Your data is stored securely in the UK</strong> under DPA 2018 / UK GDPR, on servers in the eu-west2 (London) region. Your information is never shared with third parties without your explicit consent.
+              <a href="/policies#privacy" class="text-gold-dark font-500 hover:underline ml-1">Read our Privacy Notice →</a>
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Consent — required, NOT pre-ticked -->
+            <label class="flex items-start gap-3 cursor-pointer" style="min-height: unset;">
+              <input
+                type="checkbox"
+                id="consent-referral"
+                name="consent_referral"
+                required
+                class="w-5 h-5 mt-0.5 accent-[#a6b84c] flex-shrink-0"
+                style="min-height: unset;"
+                aria-required="true"
+                aria-describedby="consent-error"
+              />
+              <span class="text-sm text-brand-black leading-relaxed">
+                <span class="font-600">I consent</span> to CivDivCIC using this information to connect me or the person I'm referring to relevant support services.
+                <a href="/policies#privacy" class="text-gold-dark hover:underline ml-1">Privacy Notice</a>
+                <span class="text-crisis-red ml-1" aria-label="required">*</span>
+              </span>
+            </label>
+            <p id="consent-error" class="form-error hidden" role="alert">You must accept the consent statement to submit this form.</p>
+
+            <!-- Marketing opt-in — optional -->
+            <label class="flex items-start gap-3 cursor-pointer" style="min-height: unset;">
+              <input
+                type="checkbox"
+                id="consent-marketing"
+                name="consent_marketing"
+                class="w-5 h-5 mt-0.5 accent-[#a6b84c] flex-shrink-0"
+                style="min-height: unset;"
+              />
+              <span class="text-sm text-black/70 leading-relaxed">
+                I am happy to receive updates and stories from CivDivCIC. <span class="text-black/40">(Optional — unsubscribe any time)</span>
+              </span>
+            </label>
+          </div>
+
+          <!-- reCAPTCHA placeholder -->
+          <div class="bg-warm-surface rounded-lg p-4 border border-black/[0.08]">
+            <p class="text-xs text-black/50">
+              This site is protected by reCAPTCHA and the Google
+              <a href="https://policies.google.com/privacy" class="text-gold-dark hover:underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and
+              <a href="https://policies.google.com/terms" class="text-gold-dark hover:underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+            </p>
+            <!-- TODO[CONFIRM]: Add reCAPTCHA widget when PUBLIC_RECAPTCHA_SITE_KEY is configured -->
+            <div id="recaptcha-widget" class="mt-2 text-xs text-black/30 italic">[reCAPTCHA widget — requires PUBLIC_RECAPTCHA_SITE_KEY env var]</div>
+          </div>
+
+          <!-- Submit error message -->
+          <div id="submit-error" class="hidden bg-crisis-red/10 border border-crisis-red/30 rounded-lg p-4" role="alert">
+            <p class="text-crisis-red text-sm font-600">There was a problem submitting your referral. Please try again or <a href="/contact" class="underline">contact us directly</a>.</p>
+          </div>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="flex flex-col sm:flex-row justify-between gap-4 mt-8 pt-6 border-t border-black/10">
+          <button
+            type="button"
+            id="btn-prev"
+            class="btn-secondary px-6 py-3 rounded-lg text-sm font-600 hidden"
+            aria-label="Go to previous step"
+          >
+            ← Back
+          </button>
+          <div class="sm:ml-auto flex gap-3">
+            <button
+              type="button"
+              id="btn-next"
+              class="btn-primary px-8 py-3 rounded-lg text-sm font-600"
+              aria-label="Continue to next step"
+            >
+              Continue →
+            </button>
+            <button
+              type="submit"
+              id="btn-submit"
+              class="btn-primary px-8 py-3 rounded-lg text-sm font-600 hidden"
+              aria-label="Submit referral"
+            >
+              Submit referral
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Confirmation screen (hidden until submit) -->
+      <div id="confirmation" class="hidden text-center py-12" aria-live="polite">
+        <div class="w-16 h-16 rounded-full bg-open-green/15 border border-open-green/40 flex items-center justify-center mx-auto mb-6" aria-hidden="true">
+          <svg class="w-8 h-8 text-open-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h2 class="font-heading font-700 text-brand-black text-2xl mb-3">Thank you — your referral has been received.</h2>
+        <p class="text-black/60 mb-8">What happens next:</p>
+        <ol class="text-left max-w-md mx-auto space-y-4 mb-10">
+          {[
+            'Our team reviews your referral within 2 working days.',
+            'We match your needs to the right partner or service.',
+            'We contact you to discuss next steps.',
+            'You are connected to the right support.',
+          ].map((step, i) => (
+            <li class="flex gap-4 items-start">
+              <span class="w-7 h-7 rounded-full bg-gold flex items-center justify-center font-heading font-700 text-brand-black text-sm flex-shrink-0">{i + 1}</span>
+              <span class="text-brand-black text-sm leading-relaxed pt-1">{step}</span>
+            </li>
+          ))}
+        </ol>
+        <a href="/support" class="btn-primary px-8 py-4 rounded-lg font-600 inline-flex">Explore support pathways →</a>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // ============================================================
+  // Referral form — multi-step logic + submit to Netlify function
+  // ============================================================
+  (function () {
+    const form    = document.getElementById('referral-form') as HTMLFormElement | null;
+    const confirm = document.getElementById('confirmation') as HTMLElement | null;
+    if (!form || !confirm) return;
+
+    let currentStep = 1;
+    const TOTAL_STEPS = 4;
+    const stepNames = ['About you / them', 'What\'s needed', 'About you (optional)', 'Consent'];
+
+    // Referral type toggle
+    document.querySelectorAll<HTMLButtonElement>('.referral-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll<HTMLButtonElement>('.referral-type-btn').forEach(b => {
+          b.setAttribute('aria-pressed', 'false');
+          b.classList.remove('bg-gold', 'text-brand-black', 'border-gold');
+          b.classList.add('bg-transparent', 'text-brand-black', 'border-black/20');
+        });
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('bg-gold', 'text-brand-black', 'border-gold');
+        btn.classList.remove('bg-transparent', 'border-black/20');
+      });
+    });
+
+    // Character counter for description
+    const descInput = document.getElementById('description') as HTMLTextAreaElement | null;
+    const descCount = document.getElementById('desc-count');
+    descInput?.addEventListener('input', () => {
+      if (descCount) descCount.textContent = String(descInput.value.length);
+    });
+
+    function showStep(n: number) {
+      for (let i = 1; i <= TOTAL_STEPS; i++) {
+        const el = document.getElementById(`step-${i}`);
+        if (el) el.classList.toggle('hidden', i !== n);
+        const indicator = document.getElementById(`step-indicator-${i}`);
+        if (indicator) {
+          indicator.className = [
+            'w-8 h-8 rounded-full flex items-center justify-center text-sm font-700 transition-colors flex-shrink-0',
+            i < n  ? 'bg-open-green text-white' :
+            i === n ? 'bg-gold text-brand-black' :
+                      'bg-black/10 text-black/40',
+          ].join(' ');
+        }
+        if (i < TOTAL_STEPS) {
+          const line = document.getElementById(`step-line-${i}`);
+          if (line) {
+            line.className = `flex-1 h-0.5 mx-1 transition-colors ${i < n ? 'bg-open-green' : 'bg-black/10'}`;
+          }
+        }
+      }
+      const stepLabel = document.getElementById('current-step-label');
+      const stepName  = document.getElementById('current-step-name');
+      if (stepLabel) stepLabel.textContent = String(n);
+      if (stepName)  stepName.textContent  = stepNames[n - 1];
+
+      const btnPrev   = document.getElementById('btn-prev');
+      const btnNext   = document.getElementById('btn-next');
+      const btnSubmit = document.getElementById('btn-submit');
+      if (btnPrev)   btnPrev.classList.toggle('hidden',   n === 1);
+      if (btnNext)   btnNext.classList.toggle('hidden',   n === TOTAL_STEPS);
+      if (btnSubmit) btnSubmit.classList.toggle('hidden', n !== TOTAL_STEPS);
+
+      currentStep = n;
+      // Scroll to top of form
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateStep(n: number): boolean {
+      if (n === 1) {
+        const name  = (document.getElementById('full-name') as HTMLInputElement)?.value.trim();
+        const phone = (document.getElementById('contact-phone') as HTMLInputElement)?.value.trim();
+        const email = (document.getElementById('contact-email') as HTMLInputElement)?.value.trim();
+        const area  = (document.getElementById('area') as HTMLInputElement)?.value.trim();
+
+        if (!name) {
+          (document.getElementById('full-name') as HTMLInputElement)?.focus();
+          alert('Please enter a full name.');
+          return false;
+        }
+        if (!phone && !email) {
+          (document.getElementById('contact-phone') as HTMLInputElement)?.focus();
+          alert('Please enter at least a phone number or email address.');
+          return false;
+        }
+        if (!area) {
+          (document.getElementById('area') as HTMLInputElement)?.focus();
+          alert('Please enter an area or outward postcode.');
+          return false;
+        }
+      }
+
+      if (n === 2) {
+        const checked = document.querySelectorAll('input[name="pillars"]:checked');
+        const err = document.getElementById('pillars-error');
+        if (checked.length === 0) {
+          err?.classList.remove('hidden');
+          return false;
+        }
+        err?.classList.add('hidden');
+      }
+
+      if (n === 4) {
+        const consent = (document.getElementById('consent-referral') as HTMLInputElement)?.checked;
+        const err = document.getElementById('consent-error');
+        if (!consent) {
+          err?.classList.remove('hidden');
+          return false;
+        }
+        err?.classList.add('hidden');
+      }
+
+      return true;
+    }
+
+    document.getElementById('btn-next')?.addEventListener('click', () => {
+      if (validateStep(currentStep)) {
+        showStep(Math.min(currentStep + 1, TOTAL_STEPS));
+      }
+    });
+
+    document.getElementById('btn-prev')?.addEventListener('click', () => {
+      showStep(Math.max(currentStep - 1, 1));
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validateStep(4)) return;
+
+      const btnSubmit = document.getElementById('btn-submit') as HTMLButtonElement;
+      const submitErr = document.getElementById('submit-error');
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = 'Submitting…';
+
+      // Gather form data
+      const name         = (document.getElementById('full-name') as HTMLInputElement).value.trim();
+      const contactPhone = (document.getElementById('contact-phone') as HTMLInputElement).value.trim();
+      const contactEmail = (document.getElementById('contact-email') as HTMLInputElement).value.trim();
+      const area         = (document.getElementById('area') as HTMLInputElement).value.trim();
+      const description  = (document.getElementById('description') as HTMLTextAreaElement).value.trim();
+      const veteranStatus = (document.getElementById('veteran-status') as HTMLSelectElement).value;
+      const ageBand      = (document.getElementById('age-band') as HTMLSelectElement).value;
+      const ethnicity    = (document.getElementById('ethnicity') as HTMLSelectElement).value;
+      const pillars      = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="pillars"]:checked')).map(i => i.value);
+      const cohortFlags  = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="cohort_flags"]:checked')).map(i => i.value);
+      const consentReferral  = (document.getElementById('consent-referral') as HTMLInputElement).checked;
+      const consentMarketing = (document.getElementById('consent-marketing') as HTMLInputElement).checked;
+      const referralType = (document.querySelector<HTMLButtonElement>('.referral-type-btn[aria-pressed="true"]'))?.dataset.referralType ?? 'self';
+
+      const payload = {
+        referral_type:    referralType,
+        name,
+        contact_phone:    contactPhone,
+        contact_email:    contactEmail,
+        area,
+        description,
+        pillars,
+        veteran_status:   veteranStatus,
+        demographics: {
+          age_band:     ageBand,
+          ethnicity,
+          cohort_flags: cohortFlags,
+        },
+        consent_referral:  consentReferral,
+        consent_marketing: consentMarketing,
+        source_page: window.location.pathname,
+      };
+
+      try {
+        const res = await fetch('/.netlify/functions/submit-referral', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          form.classList.add('hidden');
+          confirm.classList.remove('hidden');
+          confirm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          throw new Error(data.error ?? 'Unknown error');
+        }
+      } catch (err) {
+        console.error('Referral submit error:', err);
+        submitErr?.classList.remove('hidden');
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = 'Submit referral';
+      }
+    });
+
+    // Checkbox pillar labels — highlight when checked
+    document.querySelectorAll<HTMLInputElement>('input[name="pillars"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const label = cb.closest('label');
+        if (label) {
+          label.classList.toggle('border-gold', cb.checked);
+          label.classList.toggle('bg-gold/5', cb.checked);
+        }
+      });
+    });
+  })();
+</script>

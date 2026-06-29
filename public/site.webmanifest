@@ -1,0 +1,17 @@
+{
+  "name": "CivDivCIC",
+  "short_name": "CivDivCIC",
+  "description": "No veteran should feel disconnected from support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#101113",
+  "theme_color": "#C9A227",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

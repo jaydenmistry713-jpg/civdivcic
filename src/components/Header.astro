@@ -1,0 +1,194 @@
+---
+// Header.astro — sticky navigation, appears on every page via BaseLayout
+// Mobile: top bar (logo + action buttons) + sticky bottom bar (icons)
+// Desktop: full horizontal nav with dropdowns
+
+interface Props {
+  currentPath?: string;
+}
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { label: 'Get Support',      href: '/support' },
+  { label: 'Make a Referral',  href: '/referral' },
+  { label: 'About',            href: '/about' },
+  { label: 'Partnerships',     href: '/partnerships' },
+  { label: 'Get Involved',     href: '/get-involved' },
+  { label: 'Build Futures',    href: '/build-futures' },
+  { label: 'Contact',          href: '/contact' },
+];
+
+function isActive(href: string) {
+  return currentPath === href || (href !== '/' && currentPath.startsWith(href));
+}
+---
+
+<!-- Desktop / Mobile top header -->
+<header class="sticky top-0 z-50 bg-brand-black shadow-lg" role="banner">
+  <div class="container-max flex items-center justify-between gap-4 px-4 md:px-8 h-16">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 no-underline flex-shrink-0" aria-label="CivDivCIC — home">
+      <img src="/images/logo.png" alt="CivDivCIC" class="h-10 w-auto" />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+      {navItems.map(item => (
+        <a
+          href={item.href}
+          class:list={[
+            'px-3 py-2 rounded font-body font-500 text-sm no-underline transition-colors duration-150',
+            isActive(item.href)
+              ? 'text-gold font-600'
+              : 'text-white/80 hover:text-gold',
+          ]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Action buttons -->
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <a
+        href="/crisis"
+        class="btn-crisis px-4 py-2 text-sm rounded-lg font-body font-600 whitespace-nowrap hidden sm:inline-flex"
+        aria-label="Need help now — crisis support"
+      >
+        Need help now
+      </a>
+      <a
+        href="/donate"
+        class="btn-secondary-light px-4 py-2 text-sm rounded-lg font-body font-600 whitespace-nowrap hidden md:inline-flex"
+        aria-label="Donate to CivDivCIC"
+      >
+        Donate
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden text-white p-2 rounded focus-visible:ring-2 focus-visible:ring-gold"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open navigation menu"
+        style="min-height: unset;"
+      >
+        <svg id="hamburger-icon" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6"  y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden hidden bg-black-800 border-t border-white/10"
+    aria-label="Mobile navigation"
+  >
+    <nav class="container-max px-4 py-4 flex flex-col gap-1">
+      {navItems.map(item => (
+        <a
+          href={item.href}
+          class:list={[
+            'px-4 py-3 rounded-lg font-body font-500 no-underline transition-colors',
+            isActive(item.href)
+              ? 'text-gold bg-white/5 font-600'
+              : 'text-white/80 hover:text-gold hover:bg-white/5',
+          ]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="flex gap-3 mt-3 pt-3 border-t border-white/10">
+        <a href="/crisis" class="btn-crisis flex-1 text-center py-3 rounded-lg text-sm font-600">Need help now</a>
+        <a href="/donate" class="btn-secondary-light flex-1 text-center py-3 rounded-lg text-sm font-600">Donate</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile sticky bottom bar -->
+<div
+  class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-brand-black border-t border-white/10 safe-area-bottom"
+  role="navigation"
+  aria-label="Quick actions"
+>
+  <div class="flex items-stretch">
+    <a href="/support" class="flex-1 flex flex-col items-center justify-center gap-1 py-2 text-white/70 hover:text-gold text-[10px] font-500 no-underline transition-colors" aria-label="Get support">
+      <!-- Health/support icon -->
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+        <path d="M12 8v8m-4-4h8"/>
+      </svg>
+      <span>Support</span>
+    </a>
+    <a href="/referral" class="flex-1 flex flex-col items-center justify-center gap-1 py-2 text-white/70 hover:text-gold text-[10px] font-500 no-underline transition-colors" aria-label="Make a referral">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="12" y1="11" x2="12" y2="17"/>
+        <line x1="9"  y1="14" x2="15" y2="14"/>
+      </svg>
+      <span>Refer</span>
+    </a>
+    <a href="/crisis" class="flex-1 flex flex-col items-center justify-center gap-1 py-2 bg-crisis-red/10 text-crisis-red text-[10px] font-600 no-underline transition-colors" aria-label="Crisis — need help now">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+      </svg>
+      <span>Help Now</span>
+    </a>
+    <button
+      id="mobile-bottom-menu"
+      class="flex-1 flex flex-col items-center justify-center gap-1 py-2 text-white/70 hover:text-gold text-[10px] font-500 transition-colors"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      style="min-height: unset;"
+    >
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <line x1="3" y1="6"  x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+      <span>Menu</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  // Mobile menu toggle
+  const menuBtn     = document.getElementById('mobile-menu-btn');
+  const bottomBtn   = document.getElementById('mobile-bottom-menu');
+  const mobileMenu  = document.getElementById('mobile-menu');
+  const hamIcon     = document.getElementById('hamburger-icon');
+  const closeIcon   = document.getElementById('close-icon');
+
+  function toggleMenu(open?: boolean) {
+    if (!mobileMenu || !menuBtn || !hamIcon || !closeIcon) return;
+    const isOpen = open !== undefined ? open : mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden', !isOpen);
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+    bottomBtn?.setAttribute('aria-expanded', String(isOpen));
+    hamIcon.classList.toggle('hidden', isOpen);
+    closeIcon.classList.toggle('hidden', !isOpen);
+  }
+
+  menuBtn?.addEventListener('click', () => toggleMenu());
+  bottomBtn?.addEventListener('click', () => toggleMenu());
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') toggleMenu(false);
+  });
+</script>

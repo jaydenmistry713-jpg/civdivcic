@@ -1,0 +1,129 @@
+---
+// BaseLayout.astro — wraps every page with head, skip link, header, crisis bar, footer
+// All pages must import this layout.
+
+import Header   from '../components/Header.astro';
+import CrisisBar from '../components/CrisisBar.astro';
+import Footer   from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title:        string;
+  description?: string;
+  ogImage?:     string;
+  canonical?:   string;
+  noIndex?:     boolean;
+}
+
+const {
+  title,
+  description = 'CivDivCIC — connecting veterans and their families to the right support. No Wrong Door. 4th Floor, Silverstream House, 45 Fitzroy Street, London W1T 6EB.',
+  ogImage,
+  canonical,
+  noIndex = false,
+} = Astro.props;
+
+const siteUrl     = 'https://civdivcic.org.uk';
+const currentPath = Astro.url.pathname;
+const canonicalUrl = canonical ?? `${siteUrl}${currentPath}`;
+const ogImageUrl   = ogImage ?? `${siteUrl}/images/og-default.png`;
+---
+
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101113" />
+
+  <title>{title} | CivDivCIC</title>
+  <meta name="description" content={description} />
+  {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+  <!-- Canonical -->
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content={canonicalUrl} />
+  <meta property="og:title"       content={`${title} | CivDivCIC`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImageUrl} />
+  <meta property="og:locale"      content="en_GB" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={`${title} | CivDivCIC`} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImageUrl} />
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png"     href="/favicon.png" sizes="32x32" />
+  <link rel="apple-touch-icon"          href="/apple-touch-icon.png" />
+  <link rel="manifest"                  href="/site.webmanifest" />
+
+  <!-- GA4 placeholder — replace with real measurement ID -->
+  {import.meta.env.PUBLIC_GA4_ID && (
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA4_ID}`}></script>
+    <script define:vars={{ gaId: import.meta.env.PUBLIC_GA4_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId, { anonymize_ip: true });
+    </script>
+  )}
+</head>
+
+<body class="pb-16 lg:pb-0"><!-- pb-16 reserves space for mobile bottom bar -->
+
+  <!-- Skip to content link — keyboard accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Sticky header -->
+  <Header currentPath={currentPath} />
+
+  <!-- Crisis bar — pinned below header on every page -->
+  <CrisisBar />
+
+  <!-- Page content -->
+  <main id="main-content" tabindex="-1">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <Footer />
+
+  <!-- Scroll reveal — IntersectionObserver with reduced-motion guard -->
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const els = document.querySelectorAll('.reveal');
+      if (!els.length || !('IntersectionObserver' in window)) {
+        els.forEach(el => (el as HTMLElement).classList.add('visible'));
+        return;
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      els.forEach(el => io.observe(el));
+    })();
+  </script>
+
+</body>
+</html>

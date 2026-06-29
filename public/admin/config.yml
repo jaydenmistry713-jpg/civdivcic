@@ -1,0 +1,132 @@
+# Decap CMS configuration
+# Backend: Netlify Identity (Git Gateway)
+# Documentation: https://decapcms.org/docs/
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Enable editorial workflow (draft → review → publish)
+publish_mode: editorial_workflow
+
+# Media storage
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+# Site URL for previews
+site_url: https://civdivcic.org.uk
+display_url: https://civdivcic.org.uk
+logo_url: https://civdivcic.org.uk/images/logo.png
+
+# ─── Collections ────────────────────────────────────────────
+
+collections:
+
+  # ─── News ─────────────────────────────────────────────────
+  - name: news
+    label: News
+    label_singular: News article
+    folder: src/content/news
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: /news/{{slug}}
+    fields:
+      - { name: title,     label: Title,          widget: string }
+      - { name: date,      label: "Publication date", widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+      - { name: excerpt,   label: Excerpt,        widget: text, required: false, hint: "Short summary for listing pages and social sharing (2–3 sentences max)." }
+      - { name: image,     label: "Featured image", widget: image, required: false }
+      - { name: published, label: Published,       widget: boolean, default: true }
+      - { name: body,      label: Body,            widget: markdown }
+
+  # ─── Events ───────────────────────────────────────────────
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: src/content/events
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: /events/{{slug}}
+    fields:
+      - { name: title,       label: Title,          widget: string }
+      - { name: date,        label: "Event date",   widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+      - { name: time,        label: Time,           widget: string, required: false, hint: "e.g. 10:00–16:00" }
+      - { name: location,    label: Location,       widget: string, required: false }
+      - { name: description, label: Description,    widget: text, required: false }
+      - { name: image,       label: Image,          widget: image, required: false }
+      - { name: published,   label: Published,      widget: boolean, default: true }
+      - { name: body,        label: "Full details", widget: markdown }
+
+  # ─── Partners ─────────────────────────────────────────────
+  - name: partners
+    label: Partners
+    label_singular: Partner
+    folder: src/content/partners
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    fields:
+      - { name: name,        label: Name,           widget: string }
+      - { name: logo,        label: Logo,           widget: image, required: false }
+      - { name: website,     label: Website,        widget: string, required: false, hint: "Full URL including https://" }
+      - { name: funded,      label: "Funded partnership?", widget: boolean, default: false, hint: "Tick if this is a formally funded partnership. Leave unticked for signposting relationships." }
+      - name: need_tags
+        label: "Support areas"
+        widget: select
+        multiple: true
+        options:
+          - { label: "Health & Wellbeing", value: health }
+          - { label: Housing,              value: housing }
+          - { label: "Employment & Skills",value: employment }
+          - { label: "Financial Guidance", value: financial }
+          - { label: "Welfare & Social Isolation", value: welfare }
+          - { label: "Mental Wellbeing",   value: mental_wellbeing }
+          - { label: Heritage,             value: heritage }
+      - { name: description, label: Description,    widget: text }
+      - { name: active,      label: Active,         widget: boolean, default: true }
+
+  # ─── Team ─────────────────────────────────────────────────
+  - name: team
+    label: "Team"
+    label_singular: "Team member"
+    folder: src/content/team
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    fields:
+      - { name: name,  label: Name,        widget: string }
+      - { name: role,  label: Role,        widget: string }
+      - { name: bio,   label: Biography,   widget: text, required: false, hint: "Short bio (2–4 sentences)." }
+      - { name: image, label: Photo,       widget: image, required: false }
+      - { name: order, label: "Display order", widget: number, default: 99, hint: "Lower numbers appear first." }
+
+  # ─── Site Settings ────────────────────────────────────────
+  - name: site_settings
+    label: "Site Settings"
+    editor:
+      preview: false
+    files:
+      - name: general
+        label: "General settings"
+        file: src/content/settings/general.json
+        fields:
+          - { name: centre_address, label: "Centre address",  widget: text }
+          - { name: opening_hours,  label: "Opening hours",   widget: string }
+          - { name: tel,            label: "Telephone number", widget: string }
+          - name: crisis_lines
+            label: "Crisis lines"
+            widget: list
+            fields:
+              - { name: name,   label: Name,    widget: string }
+              - { name: number, label: Number,  widget: string }
+              - { name: hours,  label: Hours,   widget: string, default: "24/7" }
+          - name: social_links
+            label: "Social media links"
+            widget: object
+            fields:
+              - { name: facebook,  label: Facebook URL,   widget: string, required: false }
+              - { name: linkedin,  label: LinkedIn URL,   widget: string, required: false }
+              - { name: twitter,   label: X/Twitter URL,  widget: string, required: false }
+              - { name: instagram, label: Instagram URL,  widget: string, required: false }
+              - { name: youtube,   label: YouTube URL,    widget: string, required: false }

@@ -1,0 +1,59 @@
+---
+// Mental Wellbeing pathway (/pathways/mental-wellbeing)
+import PathwayLayout from '../../layouts/PathwayLayout.astro';
+---
+
+<PathwayLayout
+  title="Mental Wellbeing Support"
+  description="CivDivCIC signposts veterans to trauma-informed, veteran-specific mental health organisations and peer networks. Non-clinical signposting only. No Wrong Door, London."
+  pathwayName="Mental Wellbeing"
+  icon="M9 9a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3H3m6 0v6m3-3a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3h6m-6 3a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"
+  iconLabel="Mental wellbeing icon"
+  promise="We connect veterans to veteran-specific mental health services that understand military culture and trauma."
+  disclaimer="CivDivCIC does not provide clinical, therapeutic or counselling services. We are an engagement and signposting hub. If you are in mental health crisis, please call Combat Stress 0800 138 1619, Veterans' Gateway 0808 802 1212, Samaritans 116 123, or 999 in an emergency."
+  whatWeHelp={[
+    'Connecting to veteran-specific mental health services and trauma-informed therapists',
+    'Navigating NHS mental health services, including the Veterans\' Mental Health TILS service',
+    'Peer support networks for veterans living with PTSD, depression, anxiety or other conditions',
+    'Support for veterans who find it hard to talk about mental health — different approaches, different paths',
+    'Information on Combat Stress, Samaritans and other specialist veteran mental health organisations',
+    'Support for families of veterans experiencing mental health difficulties',
+  ]}
+  partnerCards={[
+    {
+      name: 'Combat Stress',
+      description: 'UK\'s leading mental health charity for veterans. Provides specialist treatment for PTSD and related conditions. Helpline: 0800 138 1619 (24/7 free).',
+      funded: false,
+      website: 'https://www.combatstress.org.uk',
+    },
+    {
+      name: 'Veterans\' Gateway',
+      description: 'First point of contact for veterans in mental health need. Trained staff available 24/7. Helpline: 0808 802 1212.',
+      funded: false,
+      website: 'https://www.veteransgateway.org.uk',
+    },
+    {
+      name: 'Samaritans',
+      description: 'Free, confidential, 24/7 listening service. Not just for crisis — can talk about anything. Helpline: 116 123.',
+      funded: false,
+      website: 'https://www.samaritans.org',
+    },
+    {
+      name: 'NHS Veterans\' Mental Health TILS',
+      description: 'NHS community-based mental health support for veterans recently discharged or transitioning. Ask your GP for a referral, or self-refer in some areas.',
+      funded: false,
+      website: 'https://www.nhs.uk',
+    },
+    {
+      name: 'West Indian Association of Service Personnel (WASP)',
+      description: 'Peer support and community connection for Caribbean and Commonwealth veterans. Cultural understanding is central to their approach.',
+      funded: true,
+      website: 'https://www.wasp.org.uk',
+    },
+  ]}
+  relatedPathways={[
+    { name: 'Health & Wellbeing', href: '/pathways/health', icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M12 8v8m-4-4h8' },
+    { name: 'Welfare & Social Isolation', href: '/pathways/welfare', icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' },
+    { name: 'Need Help Now', href: '/crisis', icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12' },
+  ]}
+/>

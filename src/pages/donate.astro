@@ -1,0 +1,37 @@
+---
+// Donate (/donate) — placeholder page
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Donate"
+  description="Support CivDivCIC — help us connect veterans to the right support. No Wrong Door. London."
+>
+
+  <section class="bg-brand-black section-padding py-14 md:py-20" aria-labelledby="donate-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="donate-heading" class="font-heading font-800 text-white heading-rule mb-6">Donate</h1>
+      <p class="text-white/70 text-lg leading-relaxed max-w-2xl">
+        Every contribution helps us make sure that no veteran feels disconnected from the support they need and deserve.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-white section-padding" aria-label="Donation information">
+    <div class="container-max max-w-3xl">
+      <div class="bg-warm-surface rounded-card p-8 border border-gold/20 text-center">
+        <div class="w-14 h-14 rounded-full bg-gold/15 border border-gold/30 flex items-center justify-center mx-auto mb-5" aria-hidden="true">
+          <svg class="w-7 h-7 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h2 class="font-heading font-700 text-brand-black text-xl mb-3">Donation facility coming soon</h2>
+        <p class="text-black/60 text-sm leading-relaxed mb-6 max-w-md mx-auto">
+          Our online donation facility is being set up. In the meantime, if you would like to support CivDivCIC, please get in touch and we will let you know how.
+        </p>
+        <a href="/contact" class="btn-primary px-8 py-3 rounded-lg font-600 inline-flex">Contact us →</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,115 @@
+---
+// Build Futures — CivDiv Homes (/build-futures)
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Build Futures — CivDiv Homes"
+  description="CivDiv Homes is a developing programme focused on creating veteran housing pathways, skills development, and regeneration opportunities in London."
+>
+
+  <!-- Hero -->
+  <section class="bg-brand-black section-padding py-14 md:py-20" aria-labelledby="build-futures-heading">
+    <div class="container-max max-w-3xl">
+      <p class="text-gold font-heading font-600 text-sm uppercase tracking-widest mb-4">Build Futures</p>
+      <h1 id="build-futures-heading" class="font-heading font-800 text-white heading-rule mb-6">CivDiv Homes</h1>
+      <p class="text-white/70 text-lg leading-relaxed max-w-2xl">
+        CivDiv Homes is a developing programme focused on creating veteran housing pathways, skills development, and regeneration opportunities in London.
+      </p>
+    </div>
+  </section>
+
+  <!-- What we are building -->
+  <section class="section-white section-padding" aria-labelledby="building-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="building-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">What we are building</h2>
+      <p class="text-black/70 leading-relaxed mb-6 max-w-2xl">
+        We are building a model that connects:
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        {[
+          { title: 'Veterans in need of stable housing', icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10' },
+          { title: 'Construction and property training pathways', icon: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' },
+          { title: 'Regeneration of underused buildings', icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' },
+          { title: 'Long-term employment opportunities', icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' },
+        ].map((item, i) => (
+          <div class="reveal card" style={`transition-delay: ${i * 75}ms`}>
+            <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-3" aria-hidden="true">
+              <svg class="w-5 h-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d={item.icon} />
+              </svg>
+            </div>
+            <p class="font-heading font-600 text-brand-black text-sm leading-snug">{item.title}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Approach -->
+  <section class="section-warm section-padding" aria-labelledby="approach-heading">
+    <div class="container-max max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div>
+          <h2 id="approach-heading" class="font-heading font-700 text-brand-black heading-rule mb-5">Our Approach</h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            CivDiv Homes will work with partners across housing, construction, and veteran support sectors to:
+          </p>
+          <ul class="space-y-3">
+            {[
+              'Identify suitable buildings for regeneration',
+              'Support veterans into construction training',
+              'Create pathways into employment and housing stability',
+              'Deliver community-focused regeneration projects',
+            ].map(item => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-5">Partnership Approach</h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            We are currently seeking strategic partners including:
+          </p>
+          <ul class="space-y-3">
+            {[
+              'Veteran training providers such as Building Heroes',
+              'Housing associations and local authorities',
+              'Construction and development partners',
+              'Social investors and regeneration programmes',
+            ].map(item => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Status & CTA -->
+  <section class="bg-brand-black section-padding py-12" aria-labelledby="status-heading">
+    <div class="container-max max-w-3xl text-center">
+      <div class="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 rounded-full px-4 py-1.5 mb-6">
+        <span class="w-2 h-2 rounded-full bg-gold-tint flex-shrink-0"></span>
+        <span class="text-gold-tint text-sm font-600">In development</span>
+      </div>
+      <h2 id="status-heading" class="font-heading font-700 text-white mb-4">Programme Status</h2>
+      <p class="text-white/70 leading-relaxed max-w-xl mx-auto mb-8">
+        This programme is currently in development and partnership formation stage. If you are interested in partnering with CivDiv Homes, please contact us.
+      </p>
+      <a href="/contact" class="btn-primary px-8 py-4 rounded-lg font-600 inline-flex">Contact us about CivDiv Homes →</a>
+    </div>
+  </section>
+
+</BaseLayout>

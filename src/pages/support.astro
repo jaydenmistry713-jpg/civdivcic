@@ -1,0 +1,202 @@
+---
+// Support Hub (/support)
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allPathways = [
+  {
+    icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M12 8v8m-4-4h8',
+    title: 'Health & Wellbeing',
+    desc: 'NHS liaison, GP registration, welfare checks, health referrals and community health connections.',
+    href: '/pathways/health',
+    prominent: true,
+  },
+  {
+    icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10',
+    title: 'Housing',
+    desc: 'Social housing navigation, crisis accommodation, tenancy support and homelessness prevention.',
+    href: '/pathways/housing',
+    prominent: true,
+  },
+  {
+    icon: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z',
+    title: 'Employment & Skills',
+    desc: 'CV support, skills translation, employer connections and vocational training pathways.',
+    href: '/pathways/employment',
+    prominent: true,
+  },
+  {
+    icon: 'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6',
+    title: 'Financial Guidance & Benefits',
+    desc: 'Benefits entitlement support, debt guidance and War Pension / AFCS signposting.',
+    href: '/pathways/financial',
+    prominent: false,
+  },
+  {
+    icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75',
+    title: 'Welfare & Social Isolation',
+    desc: 'Community activities, befriending, social groups and peer support for isolated veterans.',
+    href: '/pathways/welfare',
+    prominent: false,
+  },
+  {
+    icon: 'M9 9a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3H3m6 0v6m3-3a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3h6m-6 3a9 9 0 1 0 0-18 9 9 0 0 0 0 18z',
+    title: 'Mental Wellbeing',
+    desc: 'Signposting to veteran-specific mental health organisations, trauma-informed services and peer networks.',
+    href: '/pathways/mental-wellbeing',
+    prominent: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Get Support"
+  description="Find support across health, housing, employment, financial guidance, welfare and mental wellbeing. CivDivCIC connects veterans to the right service — No Wrong Door."
+>
+
+  <!-- Page header -->
+  <section class="bg-brand-black section-padding py-12 md:py-16" aria-labelledby="support-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="support-heading" class="font-heading font-800 text-white heading-rule mb-4">Get Support</h1>
+      <p class="text-white/70 text-lg leading-relaxed">
+        We support veterans across six areas of need. You don't have to know exactly what you need — tell us what's going on and we'll help you find the right route.
+      </p>
+      <p class="text-white/50 text-sm mt-3 max-w-xl">
+        CivDivCIC is an engagement and signposting hub. We do not deliver clinical, medical or emergency services directly. We connect you to the right partner.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pathway grid -->
+  <section class="section-white section-padding" aria-labelledby="pathways-grid-heading">
+    <div class="container-max">
+      <h2 id="pathways-grid-heading" class="sr-only">Support pathways</h2>
+
+      <!-- Big Three — prominent -->
+      <div class="mb-4">
+        <h3 class="font-heading font-600 text-black/50 text-sm uppercase tracking-widest mb-6">Primary pathways</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          {allPathways.filter(p => p.prominent).map((p, i) => (
+            <a
+              href={p.href}
+              class="card no-underline group reveal"
+              style={`transition-delay: ${i * 75}ms`}
+              aria-label={p.title}
+            >
+              <div class="w-14 h-14 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors" aria-hidden="true">
+                <svg class="w-7 h-7 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d={p.icon} />
+                </svg>
+              </div>
+              <h3 class="font-heading font-700 text-brand-black text-h3-mobile md:text-h3-desktop mb-2 group-hover:text-gold-dark transition-colors">{p.title}</h3>
+              <p class="text-black/60 text-sm leading-relaxed flex-1">{p.desc}</p>
+              <span class="text-gold-dark font-600 text-sm mt-5 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                Find support →
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Directory cards — secondary -->
+      <div>
+        <h3 class="font-heading font-600 text-black/50 text-sm uppercase tracking-widest mb-6">Further support</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {allPathways.filter(p => !p.prominent).map((p, i) => (
+            <a
+              href={p.href}
+              class="card no-underline group reveal"
+              style={`transition-delay: ${i * 75}ms`}
+              aria-label={p.title}
+            >
+              <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-3 group-hover:bg-gold/20 transition-colors" aria-hidden="true">
+                <svg class="w-5 h-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d={p.icon} />
+                </svg>
+              </div>
+              <h3 class="font-heading font-600 text-brand-black text-h3-mobile mb-2 group-hover:text-gold-dark transition-colors">{p.title}</h3>
+              <p class="text-black/60 text-sm leading-relaxed flex-1">{p.desc}</p>
+              <span class="text-gold-dark font-500 text-sm mt-4 group-hover:underline">Find support →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- National Veteran Support Pathways -->
+  <section class="section-warm section-padding" aria-labelledby="national-pathways-heading">
+    <div class="container-max">
+      <h2 id="national-pathways-heading" class="font-heading font-700 text-brand-black heading-rule mb-4">National Veteran Support Pathways</h2>
+      <p class="text-black/70 mb-8 max-w-2xl">
+        CivDivCIC helps veterans and their families access nationally recognised support programmes, ensuring the right pathway is available at the right time. Wherever you start, we connect you to the right support.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {[
+          {
+            name: 'Op ASCEND',
+            area: 'Employment & Career Support',
+            desc: 'Empowering veterans and their families for career success.',
+            icon: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z',
+          },
+          {
+            name: 'Op COURAGE',
+            area: 'Mental Health & Wellbeing',
+            desc: 'Veterans Mental Health and Wellbeing Service.',
+            icon: 'M9 9a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3H3m6 0v6m3-3a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3h6',
+          },
+          {
+            name: 'Op FORTITUDE',
+            area: 'Housing & Homelessness Prevention',
+            desc: 'Support for veterans facing homelessness.',
+            icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10',
+          },
+          {
+            name: 'Op NOVA',
+            area: 'Justice Support',
+            desc: 'Support for veterans in contact with the justice system.',
+            icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M12 8v8m-4-4h8',
+          },
+          {
+            name: 'Op RESTORE',
+            area: 'Physical Health & Recovery',
+            desc: 'Veterans Physical Health and Wellbeing Service.',
+            icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M8 12h8M12 8v8',
+          },
+        ].map((prog, i) => (
+          <div class="card reveal" style={`transition-delay: ${i * 75}ms`}>
+            <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-3" aria-hidden="true">
+              <svg class="w-5 h-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d={prog.icon} />
+              </svg>
+            </div>
+            <p class="text-gold-dark font-heading font-700 text-base mb-0.5">{prog.name}</p>
+            <p class="text-black/50 text-xs font-600 uppercase tracking-wider mb-2">{prog.area}</p>
+            <p class="text-black/60 text-sm leading-relaxed flex-1">{prog.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="bg-white rounded-card p-6 border border-gold/20 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <p class="text-black/70 text-sm leading-relaxed flex-1">
+          Not sure which pathway is right? CivDivCIC can help assess your needs and connect you to the right support quickly and confidentially.
+        </p>
+        <a href="/referral" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex whitespace-nowrap flex-shrink-0">Make a referral</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persistent helper -->
+  <section class="section-white section-padding py-10" aria-labelledby="helper-heading">
+    <div class="container-max max-w-3xl text-center">
+      <h2 id="helper-heading" class="font-heading font-700 text-brand-black mb-3">Not sure where to start?</h2>
+      <p class="text-black/60 mb-6 max-w-md mx-auto">That's exactly what we're here for. Complete a referral form and our team will make sure you're connected to the right support.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/referral" class="btn-primary px-8 py-4 rounded-lg font-600">Make a referral</a>
+        <a href="/contact" class="btn-secondary px-8 py-4 rounded-lg font-600">Talk to us</a>
+      </div>
+      <p class="text-black/40 text-sm mt-6">
+        In crisis? <a href="/crisis" class="text-gold-dark font-600 hover:underline">24/7 crisis lines are always available →</a>
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>

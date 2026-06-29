@@ -1,0 +1,18 @@
+{
+  "centre_address": "4th Floor, Silverstream House, 45 Fitzroy Street, Fitzrovia, London W1T 6EB",
+  "opening_hours": "TODO[CONFIRM]",
+  "tel": "TODO[CONFIRM]",
+  "crisis_lines": [
+    { "name": "Veterans' Gateway", "number": "0808 802 1212", "hours": "24/7" },
+    { "name": "Combat Stress",     "number": "0800 138 1619", "hours": "24/7" },
+    { "name": "Samaritans",        "number": "116 123",        "hours": "24/7" },
+    { "name": "Emergency",         "number": "999",            "hours": "24/7" }
+  ],
+  "social_links": {
+    "facebook":  "",
+    "linkedin":  "",
+    "twitter":   "",
+    "instagram": "",
+    "youtube":   ""
+  }
+}

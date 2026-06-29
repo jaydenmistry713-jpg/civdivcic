@@ -1,0 +1,274 @@
+---
+// About (/about)
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About Us"
+  description="CivDivCIC is a Community Interest Company connecting veterans and their families to the right support. Learn about our mission, pillars and No Wrong Door approach."
+>
+
+  <!-- Hero -->
+  <section class="bg-brand-black section-padding py-14 md:py-20" aria-labelledby="about-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="about-heading" class="font-heading font-800 text-white heading-rule mb-6">About CivDivCIC</h1>
+      <p class="text-white/70 text-lg leading-relaxed">
+        We exist to ensure that every veteran — regardless of background, discharge status or the complexity of their need — can access the support they have earned.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section-white section-padding" aria-labelledby="mission-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="mission-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">Our mission</h2>
+      <blockquote class="border-l-4 border-gold pl-6 my-6">
+        <p class="font-heading font-700 text-2xl md:text-3xl text-brand-black italic leading-snug">
+          "No veteran should feel disconnected from support."
+        </p>
+      </blockquote>
+      <p class="text-black/70 leading-relaxed mb-4">
+        CivDivCIC (Community Interest Company No. 13697459) is a veteran-focused engagement and signposting hub based in Fitzrovia, London. We operate a <strong>No Wrong Door</strong> approach — any veteran, family member or professional who contacts us will receive a response and be connected to the most appropriate support pathway.
+      </p>
+      <p class="text-black/70 leading-relaxed mb-4">
+        We are not a clinical, medical or emergency service provider. Our role is to listen, understand the full picture, and make warm, effective connections to the partners best placed to help. This distinction matters: we do not want to overstate what we do, and we do not want veterans to mistake us for something we are not.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission Statement -->
+  <section class="section-warm section-padding" aria-labelledby="mission-statement-heading">
+    <div class="container-max max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div>
+          <h2 id="mission-statement-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">Mission Statement</h2>
+          <blockquote class="border-l-4 border-gold pl-6 my-4">
+            <p class="font-body text-lg text-brand-black leading-relaxed">
+              "To empower veterans and communities through engagement, partnership, education, and wellbeing initiatives while preserving the contribution and legacy of Black service personnel."
+            </p>
+          </blockquote>
+        </div>
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-6">Vision Statement</h2>
+          <blockquote class="border-l-4 border-gold pl-6 my-4">
+            <p class="font-body text-lg text-brand-black leading-relaxed">
+              "To become a leading veteran engagement organisation recognised for strengthening communities, improving wellbeing, and championing the voices and experiences of Black veterans and military families."
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="section-white section-padding" aria-labelledby="values-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="values-heading" class="font-heading font-700 text-brand-black heading-rule mb-8">Core Values</h2>
+      <div class="flex flex-wrap gap-3">
+        {['Integrity', 'Inclusion', 'Respect', 'Community', 'Empowerment', 'Collaboration'].map(value => (
+          <span class="px-5 py-2.5 rounded-full bg-gold/10 border border-gold/30 font-heading font-600 text-brand-black text-sm">
+            {value}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Role / Strategic Alignment / Our Approach -->
+  <section class="section-warm section-padding" aria-labelledby="role-heading">
+    <div class="container-max max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h2 id="role-heading" class="font-heading font-700 text-brand-black heading-rule mb-5">Our Role</h2>
+          <p class="text-black/70 text-sm mb-4">CivDivCIC supports veterans by:</p>
+          <ul class="space-y-2">
+            {[
+              'Connecting individuals to appropriate support organisations',
+              'Providing information on available services and pathways',
+              'Encouraging engagement through community-based activity',
+              'Working in partnership with veteran and community organisations',
+            ].map(item => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-5">Strategic Alignment</h2>
+          <p class="text-black/70 text-sm mb-4">We operate in line with:</p>
+          <ul class="space-y-2">
+            {[
+              'UK Veterans Strategy',
+              'Armed Forces Covenant',
+              'VALOUR approach',
+            ].map(item => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-5">Our Approach</h2>
+          <ul class="space-y-2">
+            {[
+              'No Wrong Door',
+              'Partnership delivery',
+              'Community-led engagement',
+              'Measurable impact',
+            ].map(item => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Non-clinical disclaimer -->
+  <section class="section-white section-padding py-8" aria-label="Non-clinical disclaimer">
+    <div class="container-max max-w-4xl">
+      <div class="bg-warm-surface border border-gold/20 rounded-card p-5 flex gap-4 items-start">
+        <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <p class="text-sm text-black/70 leading-relaxed">
+          <strong class="text-brand-black">Non-clinical disclaimer:</strong> CivDivCIC does not provide emergency, clinical, or medical services. If you are in immediate danger or experiencing a crisis, please contact emergency services or a qualified support provider immediately.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three Pillars -->
+  <section class="section-warm section-padding" aria-labelledby="pillars-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="pillars-heading" class="font-heading font-700 text-brand-black heading-rule mb-8">Our three pillars</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          {
+            title: 'Support',
+            icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z',
+            desc: 'Connecting veterans and their families to health, housing, employment, financial, welfare and mental wellbeing services. No one is turned away without being pointed toward the right door.',
+          },
+          {
+            title: 'Contribute',
+            icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M8 12h8M12 8v8',
+            desc: 'Veterans have skills, discipline and experience that communities need. We facilitate pathways back into meaningful employment, voluntary roles and civic life.',
+          },
+          {
+            title: 'Celebrate',
+            icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+            desc: 'We recognise and celebrate the service of all veterans — including the often under-recognised contributions of Caribbean, Commonwealth, foreign national and Gurkha veterans.',
+          },
+        ].map((p, i) => (
+          <div class="reveal card" style={`transition-delay: ${i * 75}ms`}>
+            <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-4" aria-hidden="true">
+              <svg class="w-6 h-6 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d={p.icon} />
+              </svg>
+            </div>
+            <h3 class="font-heading font-700 text-brand-black mb-3">{p.title}</h3>
+            <p class="text-black/60 text-sm leading-relaxed">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section class="section-white section-padding" aria-labelledby="history-heading">
+    <div class="container-max max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 id="history-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">Our story</h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            CivDivCIC was founded with a specific purpose: to bridge the gap between veterans leaving service and the civilian support infrastructure that exists to help them. Too often, veterans — particularly those from Commonwealth and Caribbean backgrounds — find the system difficult to navigate, opaque, or simply unaware of their particular service history and needs.
+          </p>
+          <p class="text-black/70 leading-relaxed mb-4">
+            Working in close partnership with the <strong>West Indian Association of Service Personnel (WASP)</strong> and the <strong>Windrush Foundation</strong>, we bring a heritage dimension to our work that goes beyond basic signposting. We understand that for many veterans, identity, community and belonging are as important as a housing referral or a benefits check.
+          </p>
+          <p class="text-black/70 leading-relaxed">
+            Our partnership with <strong>Building Heroes (Build Futures)</strong> enables us to connect veterans to vocational training and employment pathways that translate military skills into civilian careers.
+          </p>
+        </div>
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-6">Our CIC status</h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            CivDivCIC is a Community Interest Company — a legal form designed for organisations that exist primarily to benefit the community rather than to maximise profit. As a CIC, we are required to demonstrate that our activities benefit the community, and we produce an annual Community Interest Report.
+          </p>
+          <div class="bg-warm-surface rounded-card p-5 border border-gold/20">
+            <dl class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-black/60">Company name</dt>
+                <dd class="font-600 text-brand-black">CivDivCIC</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-black/60">Company number</dt>
+                <dd class="font-600 text-brand-black">13697459</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-black/60">Company type</dt>
+                <dd class="font-600 text-brand-black">Community Interest Company</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-black/60">Registered address</dt>
+                <dd class="font-600 text-brand-black text-right">4th Floor, Silverstream House, 45 Fitzroy Street, London W1T 6EB</dd>
+              </div>
+            </dl>
+          </div>
+
+          <h3 class="font-heading font-600 text-brand-black mt-8 mb-4">Leadership</h3>
+          <p class="text-black/60 text-sm italic">
+            TODO[CONFIRM] — leadership team details to be confirmed and added here. Do not publish placeholder names.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- No Wrong Door explainer -->
+  <section class="bg-gold py-10 px-4 md:px-8" aria-labelledby="nwd-about-heading">
+    <div class="container-max max-w-3xl text-center">
+      <h2 id="nwd-about-heading" class="font-heading font-800 text-brand-black mb-3">No Wrong Door</h2>
+      <p class="text-brand-black/80 leading-relaxed max-w-xl mx-auto">
+        Our No Wrong Door principle means that wherever a veteran enters the system — through us, through a partner, through a friend — they will be picked up and connected forward. There is no wrong way to ask for help.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-white section-padding py-12" aria-label="Further actions">
+    <div class="container-max max-w-3xl">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <a href="/support" class="card no-underline group">
+          <h3 class="font-heading font-600 text-brand-black mb-2 group-hover:text-gold-dark transition-colors">Get support</h3>
+          <p class="text-black/60 text-sm mb-4">Find the right pathway for your needs.</p>
+          <span class="text-gold-dark font-500 text-sm">Explore →</span>
+        </a>
+        <a href="/partnerships" class="card no-underline group">
+          <h3 class="font-heading font-600 text-brand-black mb-2 group-hover:text-gold-dark transition-colors">Our partners</h3>
+          <p class="text-black/60 text-sm mb-4">See the organisations we work with.</p>
+          <span class="text-gold-dark font-500 text-sm">View partners →</span>
+        </a>
+        <a href="/heritage" class="card no-underline group">
+          <h3 class="font-heading font-600 text-brand-black mb-2 group-hover:text-gold-dark transition-colors">Heritage & WASP</h3>
+          <p class="text-black/60 text-sm mb-4">Our partnership and heritage programme.</p>
+          <span class="text-gold-dark font-500 text-sm">Learn more →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

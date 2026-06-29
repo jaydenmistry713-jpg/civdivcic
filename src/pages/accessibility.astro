@@ -1,0 +1,103 @@
+---
+// Accessibility Statement (/accessibility)
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Accessibility Statement"
+  description="CivDivCIC accessibility statement. We are committed to WCAG 2.2 AA conformance. Known issues, feedback contact and enforcement route."
+>
+
+  <section class="bg-brand-black section-padding py-12" aria-labelledby="accessibility-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="accessibility-heading" class="font-heading font-800 text-white heading-rule mb-4">Accessibility Statement</h1>
+      <p class="text-white/70 text-base leading-relaxed max-w-xl">
+        CivDivCIC is committed to making this website accessible to everyone, including people with disabilities.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-white section-padding" aria-label="Accessibility statement content">
+    <div class="container-max max-w-3xl prose-like">
+
+      <div class="space-y-8 text-black/70 text-sm leading-relaxed">
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black text-xl mb-3">Conformance status</h2>
+          <p>
+            We aim to meet <strong class="text-brand-black">WCAG 2.2 Level AA</strong> across this website. This standard covers a wide range of recommendations for making web content more accessible to people with disabilities, including blindness and low vision, deafness and hearing loss, limited movement, speech disabilities, photosensitivity, and cognitive limitations.
+          </p>
+          <p class="mt-3">
+            This site was built with accessibility as a core requirement, not an afterthought. Design choices — including colour contrast, font sizes, tap target sizes and keyboard navigation — were made with WCAG 2.2 AA in mind.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black text-xl mb-3">Technical approaches</h2>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Semantic HTML5 elements throughout (<code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>)</li>
+            <li>Logical heading hierarchy (h1–h6) on every page</li>
+            <li>Skip-to-content link at the top of every page</li>
+            <li>All text/background colour pairs meet minimum 4.5:1 contrast ratio (body text)</li>
+            <li>All interactive elements have a minimum 48px touch/click target</li>
+            <li>Visible focus states for keyboard navigation (gold outline)</li>
+            <li>All images have descriptive alt text or are marked as decorative</li>
+            <li>All form controls have associated labels</li>
+            <li>Error messages are associated with form fields via <code>aria-describedby</code></li>
+            <li>All ARIA roles and attributes used correctly</li>
+            <li>Motion animations are disabled for users with <code>prefers-reduced-motion</code></li>
+            <li>Crisis bar phone numbers are tap-to-call on mobile</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black text-xl mb-3">Known issues</h2>
+          <p>
+            We are aware of the following limitations and are working to address them:
+          </p>
+          <ul class="space-y-2 list-disc list-inside mt-3">
+            <li>Partner logo placeholders do not yet have alt text as logos have not been supplied — will be addressed when logos are added.</li>
+            <li>Map embed is a placeholder — the final embed will require an accessibility audit and appropriate <code>title</code> attribute.</li>
+            <li>PDF policy documents are not yet available — when published, we will ensure they meet PDF/UA standards or provide HTML equivalents.</li>
+            <li>reCAPTCHA (Google) has known accessibility limitations — we will monitor Google's updates and provide an alternative contact route for users who cannot complete it.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black text-xl mb-3">What to do if you experience problems</h2>
+          <p>
+            If you encounter any accessibility barrier on this website, please let us know. We take all feedback seriously and will do our best to fix issues promptly or provide the information in an alternative format.
+          </p>
+          <div class="mt-4 bg-warm-surface rounded-card p-5 border border-gold/20">
+            <p class="font-600 text-brand-black text-sm mb-2">Contact us:</p>
+            <ul class="space-y-1 text-sm">
+              <li>Email: <a href="mailto:admin@civdivcic.org.uk" class="text-gold-dark hover:underline">admin@civdivcic.org.uk</a></li>
+              <li>Post: 4th Floor, Silverstream House, 45 Fitzroy Street, Fitzrovia, London W1T 6EB</li>
+              <li>Tel: <span class="text-black/40 italic">TODO[CONFIRM]</span></li>
+            </ul>
+            <p class="text-xs text-black/50 mt-3">We aim to acknowledge accessibility feedback within 5 working days.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black text-xl mb-3">Enforcement</h2>
+          <p>
+            If you are not satisfied with our response to your accessibility feedback, you can contact the <strong class="text-brand-black">Equality Advisory and Support Service (EASS)</strong>:
+          </p>
+          <ul class="mt-3 space-y-1">
+            <li>Website: <a href="https://www.equalityadvisoryservice.com" class="text-gold-dark hover:underline" target="_blank" rel="noopener noreferrer">equalityadvisoryservice.com</a></li>
+            <li>Phone: 0808 800 0082</li>
+            <li>Textphone: 0808 800 0084</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black text-xl mb-3">Statement date</h2>
+          <p>This accessibility statement was last reviewed on <strong class="text-brand-black">TODO[CONFIRM — date]</strong>. We review this statement annually or when significant changes are made to the website.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

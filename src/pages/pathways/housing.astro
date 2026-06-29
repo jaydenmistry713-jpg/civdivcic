@@ -1,0 +1,58 @@
+---
+// Housing pathway (/pathways/housing)
+import PathwayLayout from '../../layouts/PathwayLayout.astro';
+---
+
+<PathwayLayout
+  title="Housing Support for Veterans"
+  description="CivDivCIC connects veterans to housing support — social housing navigation, crisis accommodation, tenancy support and homelessness prevention. London."
+  pathwayName="Housing"
+  icon="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10"
+  iconLabel="Housing icon"
+  promise="We help veterans find stable, safe housing — from emergency accommodation to longer-term tenancy support."
+  whatWeHelp={[
+    'Social housing application support and navigating local authority waiting lists',
+    'Crisis and emergency accommodation for veterans at risk of homelessness',
+    'Tenancy sustainment — support to maintain an existing tenancy',
+    'Advice on veteran-specific housing schemes and entitlements',
+    'Navigating Housing Benefit, Universal Credit housing element and Council Tax',
+    'Support for veterans with complex housing needs (mental health, substance use, criminal record)',
+  ]}
+  partnerCards={[
+    {
+      name: 'CivDiv Homes — Build Futures',
+      description: 'CivDivCIC\'s developing programme connecting veterans to housing pathways, construction training, and regeneration opportunities in London. Learn more at /build-futures.',
+      funded: false,
+      website: '/build-futures',
+    },
+    {
+      name: 'SPACES (Specialist Provision and Community Engagement Services)',
+      description: 'Veteran-specific housing support across England. Provides supported accommodation and move-on planning.',
+      funded: false,
+      website: '#TODO[CONFIRM]',
+    },
+    {
+      name: 'Veterans\' Gateway',
+      description: 'First point of contact for veterans in housing need. Can connect to emergency and crisis housing across the UK.',
+      funded: false,
+      website: 'https://www.veteransgateway.org.uk',
+    },
+    {
+      name: 'SSAFA',
+      description: 'Practical housing assistance including deposits, furniture and household goods for veterans in need.',
+      funded: false,
+      website: 'https://www.ssafa.org.uk',
+    },
+    {
+      name: 'West Indian Association of Service Personnel (WASP)',
+      description: 'Supports Caribbean and Commonwealth veterans who may face additional barriers to housing, including those navigating the immigration and benefit system.',
+      funded: true,
+      website: 'https://www.wasp.org.uk',
+    },
+  ]}
+  relatedPathways={[
+    { name: 'Financial Guidance', href: '/pathways/financial', icon: 'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' },
+    { name: 'Welfare & Social Isolation', href: '/pathways/welfare', icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' },
+    { name: 'Health & Wellbeing', href: '/pathways/health', icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M12 8v8m-4-4h8' },
+  ]}
+/>

@@ -1,0 +1,217 @@
+---
+// PathwayLayout.astro — shared layout for all 6 pathway pages
+// Extends BaseLayout and provides the standard 8-section pathway template.
+
+import BaseLayout from './BaseLayout.astro';
+
+interface PartnerCard {
+  name:        string;
+  description: string;
+  funded:      boolean;
+  website?:    string;
+}
+
+interface Props {
+  title:           string;
+  description:     string;
+  pathwayName:     string;
+  icon:            string; // SVG path data
+  iconLabel:       string; // accessible name for icon
+  promise:         string; // one-line promise under H1
+  whatWeHelp:      string[];
+  partnerCards:    PartnerCard[];
+  relatedPathways: Array<{ name: string; href: string; icon: string }>;
+  disclaimer?:     string; // non-clinical disclaimer if needed
+  color?:          string; // accent (defaults to gold)
+}
+
+const {
+  title,
+  description,
+  pathwayName,
+  icon,
+  iconLabel,
+  promise,
+  whatWeHelp,
+  partnerCards,
+  relatedPathways,
+  disclaimer,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+
+  <!-- 1. Breadcrumb -->
+  <nav class="bg-warm-surface border-b border-black/10 py-3 px-4 md:px-8" aria-label="Breadcrumb">
+    <div class="container-max">
+      <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item" class="text-gold-dark no-underline hover:underline text-sm">
+            <span itemprop="name">Home</span>
+          </a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="breadcrumb-sep mx-2" aria-hidden="true">/</span>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/support" itemprop="item" class="text-gold-dark no-underline hover:underline text-sm">
+            <span itemprop="name">Get Support</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="breadcrumb-sep mx-2" aria-hidden="true">/</span>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+          <span itemprop="name" class="text-sm text-brand-black font-500">{pathwayName}</span>
+          <meta itemprop="position" content="3" />
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Non-clinical disclaimer (health / mental wellbeing pathways) -->
+  {disclaimer && (
+    <div class="bg-warm-surface border-b border-gold/30">
+      <div class="container-max px-4 md:px-8 py-3">
+        <p class="text-sm text-black/70 flex gap-2 items-start">
+          <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>{disclaimer}</span>
+        </p>
+      </div>
+    </div>
+  )}
+
+  <!-- 2. Hero compact -->
+  <section class="bg-brand-black section-padding py-12 md:py-16">
+    <div class="container-max">
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+        <div class="w-16 h-16 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+          <svg class="w-8 h-8 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d={icon} />
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-heading font-800 text-white heading-rule">{pathwayName}</h1>
+          <p class="text-white/70 text-lg mt-4 max-w-2xl">{promise}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. What we can help with -->
+  <section class="section-white section-padding">
+    <div class="container-max max-w-4xl">
+      <h2 class="font-heading font-700 text-brand-black heading-rule mb-8">What we can help with</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="list">
+        {whatWeHelp.map(item => (
+          <li class="reveal flex gap-3 items-start bg-warm-surface rounded-card p-4 border border-black/[0.06]">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span class="text-brand-black text-sm leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. How No Wrong Door works -->
+  <section class="section-warm section-padding">
+    <div class="container-max max-w-4xl">
+      <h2 class="font-heading font-700 text-brand-black heading-rule mb-8">How it works — No Wrong Door</h2>
+      <ol class="grid grid-cols-1 md:grid-cols-3 gap-6" role="list">
+        {[
+          { step: '1', title: 'Reach out',        desc: 'Contact us through any channel — phone, email, in person, or via this website. There is no wrong way to start.' },
+          { step: '2', title: 'We listen',         desc: 'Our team takes time to understand your full situation — not just the presenting need. You are heard, not processed.' },
+          { step: '3', title: 'We connect you',    desc: 'We match you to the right partner organisation or service and stay in touch to make sure the connection sticks.' },
+        ].map(s => (
+          <li class="reveal card text-center">
+            <div class="w-10 h-10 rounded-full bg-gold flex items-center justify-center font-heading font-800 text-brand-black text-lg mx-auto mb-4" aria-hidden="true">
+              {s.step}
+            </div>
+            <h3 class="font-heading font-600 text-brand-black mb-2">{s.title}</h3>
+            <p class="text-black/70 text-sm leading-relaxed">{s.desc}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. Where we route you -->
+  <section class="section-white section-padding">
+    <div class="container-max max-w-4xl">
+      <h2 class="font-heading font-700 text-brand-black heading-rule mb-2">Where we connect you</h2>
+      <p class="text-black/60 text-sm mb-8">
+        CivDivCIC is an engagement and signposting hub, not a direct service provider. The following organisations are among those we work with.
+        <span class="font-600 text-brand-black">Funded</span> = formally funded partnership; <span class="font-600 text-brand-black">Unfunded</span> = signposting relationship.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {partnerCards.map(partner => (
+          <div class="reveal card">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <h3 class="font-heading font-600 text-brand-black text-base">{partner.name}</h3>
+              <span class:list={[
+                'text-[10px] font-600 uppercase tracking-wider px-2 py-1 rounded-full flex-shrink-0',
+                partner.funded
+                  ? 'bg-gold/15 text-gold-dark'
+                  : 'bg-black/5 text-black/50',
+              ]}>
+                {partner.funded ? 'Funded' : 'Unfunded'}
+              </span>
+            </div>
+            <p class="text-black/70 text-sm leading-relaxed flex-1">{partner.description}</p>
+            {partner.website && (
+              <a href={partner.website} class="mt-3 text-gold-dark text-sm font-500 no-underline hover:underline inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                Visit website
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CTAs -->
+  <section class="bg-brand-black section-padding py-12">
+    <div class="container-max max-w-2xl text-center">
+      <h2 class="font-heading font-700 text-white mb-3">Ready to get support?</h2>
+      <p class="text-white/70 mb-8">Our team reviews referrals within 2 working days. You can also call or visit us in person — whatever works best for you.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/referral" class="btn-primary px-8 py-4 rounded-lg text-base font-600">Make a referral</a>
+        <a href="/contact" class="btn-secondary-light px-8 py-4 rounded-lg text-base font-600">Call or visit us — Tel: TODO[CONFIRM]</a>
+      </div>
+      <p class="text-white/40 text-sm mt-6">
+        Out of hours? <a href="/crisis" class="text-white/70 hover:text-white underline">24/7 crisis lines are always available →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. (Out of hours route embedded in CTA section above) -->
+
+  <!-- 8. Related needs -->
+  {relatedPathways.length > 0 && (
+    <section class="section-warm section-padding">
+      <div class="container-max max-w-4xl">
+        <h2 class="font-heading font-700 text-brand-black heading-rule mb-8">Related support areas</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          {relatedPathways.map(rp => (
+            <a href={rp.href} class="card no-underline group" aria-label={`Explore ${rp.name} support`}>
+              <div class="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors" aria-hidden="true">
+                <svg class="w-5 h-5 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d={rp.icon} />
+                </svg>
+              </div>
+              <h3 class="font-heading font-600 text-brand-black text-base mb-2 group-hover:text-gold-dark transition-colors">{rp.name}</h3>
+              <span class="text-gold-dark text-sm font-500 mt-auto">Explore →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+</BaseLayout>

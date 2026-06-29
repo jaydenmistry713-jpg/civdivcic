@@ -1,0 +1,219 @@
+---
+// Heritage & Membership — WASP (/heritage)
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Heritage & WASP Partnership"
+  description="CivDivCIC and the West Indian Association of Service Personnel (WASP) celebrate Caribbean and Commonwealth service heritage through community engagement and the Membership & Heritage Engagement Programme."
+>
+
+  <!-- Hero -->
+  <section class="bg-brand-black section-padding py-14 md:py-20" aria-labelledby="heritage-heading">
+    <div class="container-max max-w-3xl">
+      <p class="text-gold font-heading font-600 text-sm uppercase tracking-widest mb-4">Heritage & Community</p>
+      <h1 id="heritage-heading" class="font-heading font-800 text-white heading-rule mb-6">
+        Caribbean & Commonwealth Service Heritage
+      </h1>
+      <p class="text-white/70 text-lg leading-relaxed max-w-2xl">
+        Thousands of men and women from the Caribbean and Commonwealth nations served with the British Armed Forces. Their contributions deserve to be recognised, celebrated and remembered.
+      </p>
+    </div>
+  </section>
+
+  <!-- Veteran Membership & Heritage Engagement Programme Overview -->
+  <section class="section-white section-padding" aria-labelledby="vmhep-heading">
+    <div class="container-max max-w-4xl">
+      <p class="text-gold font-heading font-600 text-sm uppercase tracking-widest mb-3">In partnership with WASP</p>
+      <h2 id="vmhep-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">
+        Veteran Membership &amp; Heritage Engagement Programme
+      </h2>
+      <p class="text-black/70 leading-relaxed mb-4 max-w-2xl">
+        The CivDivCIC Veteran Membership &amp; Heritage Engagement Programme is a structured initiative designed to strengthen connection, recognition, and participation among veterans. Delivered in partnership with the West Indian Association of Service Personnel (WASP), the programme brings together membership engagement and heritage-focused events to support community connection and veteran identity.
+      </p>
+      <p class="text-black/70 leading-relaxed mb-6 max-w-2xl">
+        This is not a commercial or ticket-based service. It is a community engagement and heritage recognition programme that supports inclusion, connection, and participation.
+      </p>
+
+      <h3 class="font-heading font-600 text-brand-black mb-4">Programme Purpose</h3>
+      <p class="text-black/70 text-sm mb-3">This programme exists to:</p>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        {[
+          'Strengthen veteran connection and engagement',
+          'Recognise and preserve Caribbean and Commonwealth service heritage',
+          'Support community participation and inclusion',
+          'Create structured opportunities for veterans to come together',
+          'Link veterans into wider community and support networks',
+        ].map(item => (
+          <li class="flex gap-3 items-start text-sm text-black/70">
+            <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <p class="text-black/60 text-sm italic">
+        It forms part of CivDivCIC's wider role as a Veteran Engagement Hub, supporting connection within the broader support system.
+      </p>
+    </div>
+  </section>
+
+  <!-- WASP Partnership -->
+  <section class="section-white section-padding" aria-labelledby="wasp-heading">
+    <div class="container-max max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 id="wasp-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">
+            Our partnership with WASP
+          </h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            The <strong>West Indian Association of Service Personnel (WASP)</strong> is CivDivCIC's primary partner. WASP exists to support, represent and celebrate those from West Indian and Caribbean backgrounds who have served — or are currently serving — in the British Armed Forces.
+          </p>
+          <p class="text-black/70 leading-relaxed mb-4">
+            Together, CivDivCIC and WASP provide a bridge between the lived experience of Caribbean veterans and the formal support infrastructure. We understand that language, culture, trust and community are as important as practical interventions.
+          </p>
+          <p class="text-black/70 leading-relaxed mb-6">
+            Our partnership ensures that no Caribbean or Commonwealth veteran is overlooked, misidentified or underserved because the system was not built with them in mind.
+          </p>
+          <a href="https://www.wasp.org.uk" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex" target="_blank" rel="noopener noreferrer">
+            Visit WASP →
+          </a>
+        </div>
+        <!-- Image placeholder: WASP event or community photograph -->
+        <div class="rounded-card overflow-hidden bg-warm-surface border border-black/[0.06] min-h-[280px] flex items-center justify-center" aria-hidden="true">
+          <span class="text-black/30 text-sm italic text-center px-8">Image placeholder: WASP partnership event or Caribbean veterans gathering — TODO[add image]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Windrush Foundation -->
+  <section class="section-warm section-padding" aria-labelledby="windrush-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="windrush-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">
+        Windrush Foundation
+      </h2>
+      <p class="text-black/70 leading-relaxed mb-4 max-w-2xl">
+        We also work with the <strong>Windrush Foundation</strong>, which exists to safeguard and advance the education and welfare of people of Caribbean heritage in the UK. For many Caribbean veterans, the Windrush story is personal family history.
+      </p>
+      <p class="text-black/70 leading-relaxed mb-6 max-w-2xl">
+        Our collaboration with the Windrush Foundation brings historical context and community legitimacy to our work, ensuring that heritage engagement is grounded in accuracy, dignity and respect.
+      </p>
+      <a href="#TODO[CONFIRM]" class="btn-secondary px-6 py-3 rounded-lg text-sm font-600 inline-flex">
+        Windrush Foundation — TODO[CONFIRM link]
+      </a>
+    </div>
+  </section>
+
+  <!-- Membership & Heritage Engagement Programme -->
+  <section class="section-white section-padding" aria-labelledby="mhep-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="mhep-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">
+        Membership & Heritage Engagement Programme
+      </h2>
+      <p class="text-black/70 leading-relaxed mb-6 max-w-2xl">
+        The Membership & Heritage Engagement Programme is our community-facing strand, delivered in partnership with WASP and the Windrush Foundation. It provides:
+      </p>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        {[
+          { title: 'Oral history collection', desc: 'Recording the service stories of Caribbean and Commonwealth veterans before they are lost.' },
+          { title: 'Community events', desc: 'Commemorations, commemorative displays and community gatherings that celebrate service and build belonging.' },
+          { title: 'Heritage talks', desc: 'Educational talks for schools, community groups and civic organisations about the contribution of Caribbean and Commonwealth veterans.' },
+          { title: 'Peer networks', desc: 'Connecting veterans from similar backgrounds to reduce social isolation and build solidarity.' },
+          { title: 'Documentation support', desc: 'Helping veterans navigate processes like the HM Armed Forces Veteran Card and service record requests.' },
+          { title: 'Legacy projects', desc: 'Working with partners to create lasting community recognition of Caribbean and Commonwealth service.' },
+        ].map((item, i) => (
+          <li class="reveal card" style={`transition-delay: ${i * 60}ms`}>
+            <h3 class="font-heading font-600 text-brand-black mb-2 text-h3-mobile">{item.title}</h3>
+            <p class="text-black/60 text-sm leading-relaxed">{item.desc}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="text-black/50 text-sm italic">
+        This programme is a community engagement initiative — it is not a commercial membership scheme.
+      </p>
+    </div>
+  </section>
+
+  <!-- HM Armed Forces Veteran Card -->
+  <section class="section-warm section-padding" aria-labelledby="veteran-card-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="veteran-card-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">
+        HM Armed Forces Veteran Card
+      </h2>
+      <p class="text-black/70 leading-relaxed mb-4 max-w-2xl">
+        Veterans are male and female, young and old. If you have not yet got your HM Armed Forces Veteran Card, contact us and we will direct you on how to apply.
+      </p>
+      <p class="text-black/70 leading-relaxed mb-6 max-w-2xl">
+        The HM Armed Forces Veteran Card is the official way for UK veterans to demonstrate their service status to employers, healthcare providers and other services. We can help veterans from all backgrounds, including Commonwealth and Caribbean veterans, to apply.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-card p-5 border border-black/[0.06]">
+          <h3 class="font-heading font-600 text-brand-black mb-3">What is it?</h3>
+          <ul class="space-y-2">
+            {[
+              'The official state-recognised proof of veteran status',
+              'Issued by the MOD and supported by the Office for Veterans\' Affairs',
+              'Confirms service in UK Armed Forces',
+              'Used as proof of veteran status',
+              'Helps access veteran support services',
+              'Can be used for identity verification in some services',
+              'Available in physical and digital form',
+            ].map(item => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-white rounded-card p-5 border border-black/[0.06]">
+          <h3 class="font-heading font-600 text-brand-black mb-3">Who is eligible?</h3>
+          <ul class="space-y-2">
+            {[
+              'Anyone who has served at least one day in His Majesty\'s Armed Forces (Regular or Reserve)',
+              'Commonwealth citizens who served in the UK Armed Forces',
+              'Gurkha veterans',
+              'Veterans who have been discharged, including on medical grounds',
+            ].map(item => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-black/60 text-sm mb-4">
+        If you need help applying or have questions about eligibility, contact us and we will guide you through the process.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="/referral" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex">Get help with your application</a>
+        <a href="https://www.gov.uk/guidance/veteran-card" class="btn-secondary px-6 py-3 rounded-lg text-sm font-600 inline-flex" target="_blank" rel="noopener noreferrer">
+          GOV.UK — Veteran Card →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inclusion statement -->
+  <section class="bg-brand-black section-padding py-12" aria-labelledby="inclusion-heritage-heading">
+    <div class="container-max max-w-3xl text-center">
+      <h2 id="inclusion-heritage-heading" class="font-heading font-700 text-white mb-4">
+        Every service counts
+      </h2>
+      <p class="text-white/70 leading-relaxed max-w-xl mx-auto mb-8">
+        CivDivCIC supports all veterans regardless of nationality, background, rank, length of service or discharge status. Caribbean, Commonwealth, foreign national and Gurkha veterans are not an afterthought — they are central to who we are.
+      </p>
+      <a href="/support" class="btn-primary px-8 py-4 rounded-lg font-600 inline-flex">Get support →</a>
+    </div>
+  </section>
+
+</BaseLayout>

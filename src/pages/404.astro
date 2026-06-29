@@ -1,0 +1,55 @@
+---
+// Custom 404 — no dead ends, routes back to Support Hub
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you were looking for could not be found. CivDivCIC — veteran support hub, London."
+  noIndex={true}
+>
+
+  <section class="bg-brand-black min-h-[70vh] flex items-center section-padding" aria-labelledby="not-found-heading">
+    <div class="container-max max-w-2xl text-center">
+
+      <!-- 404 visual -->
+      <div class="font-heading font-800 text-gold/20 text-[120px] md:text-[180px] leading-none select-none mb-4" aria-hidden="true">
+        404
+      </div>
+
+      <h1 id="not-found-heading" class="font-heading font-700 text-white text-2xl md:text-3xl mb-4">
+        Page not found
+      </h1>
+      <p class="text-white/60 text-base leading-relaxed mb-8 max-w-md mx-auto">
+        The page you were looking for doesn't exist or has moved. But remember — no wrong door. Let's find what you need.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+        <a href="/support" class="btn-primary px-8 py-4 rounded-lg font-600 text-base">Get Support</a>
+        <a href="/referral" class="btn-secondary-light px-8 py-4 rounded-lg font-600 text-base">Make a Referral</a>
+        <a href="/" class="btn-secondary-light px-8 py-4 rounded-lg font-600 text-base">Home</a>
+      </div>
+
+      <!-- Quick links -->
+      <div class="border-t border-white/10 pt-8">
+        <p class="text-white/40 text-sm mb-4">Or go directly to:</p>
+        <nav aria-label="Recovery navigation" class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          {[
+            { label: 'Health & Wellbeing', href: '/pathways/health' },
+            { label: 'Housing',            href: '/pathways/housing' },
+            { label: 'Employment',         href: '/pathways/employment' },
+            { label: 'Financial Guidance', href: '/pathways/financial' },
+            { label: 'Crisis Help',        href: '/crisis' },
+            { label: 'Contact',            href: '/contact' },
+          ].map(l => (
+            <a href={l.href} class="text-white/60 hover:text-gold text-sm no-underline hover:underline transition-colors">
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

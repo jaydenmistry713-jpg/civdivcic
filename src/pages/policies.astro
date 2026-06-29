@@ -1,0 +1,130 @@
+---
+// Policies & Documents (/policies) — REQ-5.2
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const policies = [
+  {
+    id: 'privacy',
+    title: 'Privacy Notice',
+    description: 'How we collect, use, store and protect personal data. Covers website visitors, referral form submissions, newsletter subscribers and anyone who contacts us.',
+    lastUpdated: 'TODO[CONFIRM]',
+  },
+  {
+    id: 'safeguarding',
+    title: 'Safeguarding Policy',
+    description: 'Our commitment to protecting vulnerable adults and children who access our services or engage with our organisation. Includes reporting procedures.',
+    lastUpdated: 'TODO[CONFIRM]',
+  },
+  {
+    id: 'it-data',
+    title: 'IT & Data Protection Policy',
+    description: 'Technical and organisational measures in place to protect data, including Firestore data residency (eu-west2 / London), access controls and incident response.',
+    lastUpdated: 'TODO[CONFIRM]',
+  },
+  {
+    id: 'equality',
+    title: 'Equality & Inclusion Policy',
+    description: 'Our commitment to equality of access for all veterans regardless of background, ethnicity, nationality, discharge status, gender or age.',
+    lastUpdated: 'TODO[CONFIRM]',
+  },
+  {
+    id: 'complaints',
+    title: 'Complaints Policy',
+    description: 'How to raise a concern or complaint about our services, and how we will respond. Includes timescales and escalation routes.',
+    lastUpdated: 'TODO[CONFIRM]',
+  },
+  {
+    id: 'terms',
+    title: 'Terms & Conditions',
+    description: 'Terms of use for this website. Covers acceptable use, intellectual property, disclaimers and limitations of liability.',
+    lastUpdated: 'TODO[CONFIRM]',
+  },
+  {
+    id: 'governance',
+    title: 'Governance & Accountability',
+    description: 'Our governance structure, board composition, annual Community Interest Report, financial reporting and accountability mechanisms.',
+    lastUpdated: 'TODO[CONFIRM]',
+  },
+];
+---
+
+<BaseLayout
+  title="Policies & Documents"
+  description="CivDivCIC policies including Privacy Notice, Safeguarding Policy, Data Protection Policy, Equality & Inclusion, Complaints and Governance documents."
+>
+
+  <!-- Hero -->
+  <section class="bg-brand-black section-padding py-12 md:py-16" aria-labelledby="policies-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="policies-heading" class="font-heading font-800 text-white heading-rule mb-4">Policies & Documents</h1>
+      <p class="text-white/70 text-base leading-relaxed max-w-xl">
+        We are committed to transparency, accountability and good governance. Our key policies are listed below and available to download.
+      </p>
+    </div>
+  </section>
+
+  <!-- Policies list -->
+  <section class="section-white section-padding" aria-label="Policy documents">
+    <div class="container-max max-w-4xl">
+      <div class="space-y-4">
+        {policies.map((policy, i) => (
+          <div
+            id={policy.id}
+            class="reveal card scroll-mt-24"
+            style={`transition-delay: ${i * 50}ms`}
+          >
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+              <div class="flex-1 min-w-0">
+                <h2 class="font-heading font-700 text-brand-black text-h3-mobile mb-2">{policy.title}</h2>
+                <p class="text-black/60 text-sm leading-relaxed mb-3">{policy.description}</p>
+                <p class="text-black/40 text-xs">
+                  Last updated: <span class="text-black/50 italic">{policy.lastUpdated}</span>
+                </p>
+              </div>
+              <div class="flex-shrink-0">
+                <!-- Download link placeholder — href to be replaced with actual PDF when documents are finalised -->
+                <a
+                  href={`#TODO[CONFIRM — add PDF link for ${policy.title}]`}
+                  class="btn-secondary px-5 py-2.5 rounded-lg text-sm font-600 inline-flex items-center gap-2"
+                  aria-label={`Download ${policy.title} as PDF`}
+                >
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Update note -->
+      <div class="mt-10 bg-warm-surface rounded-card p-6 border border-gold/20">
+        <h3 class="font-heading font-600 text-brand-black mb-2">About these documents</h3>
+        <p class="text-black/70 text-sm leading-relaxed">
+          All policy documents are dated and reviewed regularly. Where the "last updated" date reads "TODO[CONFIRM]", the document is in preparation and will be published as soon as it is finalised and approved by our board. If you need to see a specific policy urgently, please contact us at <a href="mailto:admin@civdivcic.org.uk" class="text-gold-dark hover:underline">admin@civdivcic.org.uk</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complaints route -->
+  <section class="section-warm section-padding py-10" aria-labelledby="complaints-route-heading">
+    <div class="container-max max-w-3xl">
+      <h2 id="complaints-route-heading" class="font-heading font-700 text-brand-black heading-rule mb-4">How to raise a concern</h2>
+      <p class="text-black/70 text-sm leading-relaxed mb-4">
+        If you have a concern about our services, our data practices or our conduct, we want to hear from you. You can contact us directly at <a href="mailto:admin@civdivcic.org.uk" class="text-gold-dark hover:underline">admin@civdivcic.org.uk</a>, or use our <a href="/contact" class="text-gold-dark hover:underline">general enquiry form</a>.
+      </p>
+      <p class="text-black/70 text-sm leading-relaxed mb-4">
+        If you are not satisfied with our response, you may escalate to the regulator. For data protection matters, the relevant authority is the <strong>Information Commissioner's Office (ICO)</strong>: <a href="https://ico.org.uk" class="text-gold-dark hover:underline" target="_blank" rel="noopener noreferrer">ico.org.uk</a> · 0303 123 1113.
+      </p>
+      <p class="text-black/70 text-sm leading-relaxed">
+        For concerns about our Community Interest Company status, the regulator is the <strong>Office of the Regulator of Community Interest Companies (ORCIC)</strong>: <a href="https://www.gov.uk/government/organisations/office-of-the-regulator-of-community-interest-companies" class="text-gold-dark hover:underline" target="_blank" rel="noopener noreferrer">gov.uk/orcic</a>.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>

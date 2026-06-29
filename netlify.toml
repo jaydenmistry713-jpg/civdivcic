@@ -1,0 +1,42 @@
+[build]
+  command   = "npm run build"
+  publish   = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION     = "20"
+  # Netlify uses esbuild to bundle TypeScript functions automatically.
+  # No additional bundler config needed for .ts functions.
+
+[functions]
+  # Bundle each function independently (default for Netlify)
+  # External packages (firebase-admin, @sendgrid/mail, uuid) are
+  # bundled into the function zip by Netlify's esbuild pipeline.
+
+[[redirects]]
+  from   = "/admin"
+  to     = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from   = "/*"
+  to     = "/404"
+  status = 404
+
+[dev]
+  command = "npm run dev"
+  port    = 4321
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    Permissions-Policy     = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://firestore.googleapis.com; frame-src https://www.google.com;"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

@@ -1,0 +1,340 @@
+---
+// Home page (/)
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const bigThree = [
+  {
+    icon: 'M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z M12 8v8m-4-4h8',
+    iconLabel: 'Health icon',
+    title: 'Health & Wellbeing',
+    desc: 'Access to NHS liaison, GP registration support, welfare checks and community health connections.',
+    href: '/pathways/health',
+  },
+  {
+    icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10',
+    iconLabel: 'Housing icon',
+    title: 'Housing',
+    desc: 'Navigation through social housing, crisis accommodation, tenancy support and homelessness prevention.',
+    href: '/pathways/housing',
+  },
+  {
+    icon: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z',
+    iconLabel: 'Employment icon',
+    title: 'Employment & Skills',
+    desc: 'CV support, skills translation, employer introductions and vocational training pathways.',
+    href: '/pathways/employment',
+  },
+];
+
+const secondaryNeeds = [
+  {
+    icon: 'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6',
+    iconLabel: 'Financial guidance icon',
+    title: 'Financial Guidance & Benefits',
+    desc: 'Benefits entitlement support, debt guidance and War Pension / AFCS signposting.',
+    href: '/pathways/financial',
+  },
+  {
+    icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z',
+    iconLabel: 'Welfare icon',
+    title: 'Welfare & Social Isolation',
+    desc: 'Community activities, befriending, social groups and peer support for isolated veterans.',
+    href: '/pathways/welfare',
+  },
+  {
+    icon: 'M9 9a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3H3m6 0v6m3-3a3 3 0 0 1 3-3m-3 3a3 3 0 0 0 3 3m-3-3h6m-6 3a9 9 0 1 0 0-18 9 9 0 0 0 0 18z',
+    iconLabel: 'Mental wellbeing icon',
+    title: 'Mental Wellbeing',
+    desc: 'Signposting to trauma-informed, veteran-specific mental health organisations and peer networks.',
+    href: '/pathways/mental-wellbeing',
+  },
+];
+---
+
+<BaseLayout
+  title="No veteran should feel disconnected"
+  description="CivDivCIC connects veterans and their families to the right support — health, housing, employment, financial guidance and wellbeing. No Wrong Door. London W1T 6EB."
+>
+
+  <!-- SECTION 1: Hero -->
+  <section class="relative bg-brand-black overflow-hidden" aria-label="Welcome">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-black via-black-800 to-[#0d1a14]" aria-hidden="true"></div>
+
+    <div class="container-max px-4 md:px-8 lg:px-16 py-16 md:py-24 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+        <!-- Left: image -->
+        <div class="order-2 md:order-1 w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black-800 border border-white/10 flex items-center justify-center">
+          <!-- TODO[CONFIRM]: replace with a real photograph of veterans in a community setting -->
+          <p class="text-white/20 text-sm text-center px-6 italic">Image placeholder — veteran community photograph</p>
+        </div>
+
+        <!-- Right: text -->
+        <div class="order-1 md:order-2">
+          <p class="text-gold font-heading font-600 text-sm uppercase tracking-widest mb-4">
+            West Indian Association of Service Personnel · Windrush Foundation · Building Heroes
+          </p>
+          <h1 class="font-heading font-800 text-white text-h1-mobile md:text-h1-desktop leading-tight mb-4">
+            No veteran should feel<br class="hidden md:block" />
+            <span class="text-gold">disconnected.</span>
+          </h1>
+          <p class="text-white/70 text-lg md:text-xl mb-4 font-body">
+            Connect · Heritage · Opportunity
+          </p>
+          <p class="text-white/65 text-base mb-10 leading-relaxed">
+            We empower veterans and their communities through engagement, partnership and wellbeing — preserving the legacy of Black service personnel while connecting all who served to the support they have earned.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/support" class="btn-primary px-8 py-4 text-base rounded-lg font-600 text-center">
+              Get Support
+            </a>
+            <a href="/referral" class="btn-secondary-light px-8 py-4 text-base rounded-lg font-600 text-center">
+              Make a Referral
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Big Three cards -->
+  <section class="section-white section-padding" aria-labelledby="big-three-heading">
+    <div class="container-max">
+      <div class="text-center mb-10">
+        <h2 id="big-three-heading" class="font-heading font-700 text-brand-black">Primary support pathways</h2>
+        <p class="text-black/60 mt-2 max-w-xl mx-auto">The areas we are most commonly asked about. Click through to find out how we can help and who we connect you with.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {bigThree.map((item, i) => (
+          <a
+            href={item.href}
+            class="card group no-underline reveal"
+            style={`transition-delay: ${i * 75}ms`}
+            aria-label={`${item.title} — find support`}
+          >
+            <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors" aria-hidden="true">
+              <svg class="w-6 h-6 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d={item.icon} />
+              </svg>
+            </div>
+            <h3 class="font-heading font-700 text-brand-black mb-2 group-hover:text-gold-dark transition-colors">{item.title}</h3>
+            <p class="text-black/60 text-sm leading-relaxed flex-1">{item.desc}</p>
+            <span class="text-gold-dark font-600 text-sm mt-4 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+              Find support
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Open now? centre strip -->
+  <section class="bg-black-800 py-8 px-4 md:px-8" aria-label="Centre opening status">
+    <div class="container-max flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <!-- Open status badge — TODO[CONFIRM] replace with dynamic status or confirmed hours -->
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-open-green/20 border border-open-green/40 text-open-green text-sm font-600" aria-live="polite">
+          <span class="w-2 h-2 rounded-full bg-open-green animate-pulse" aria-hidden="true"></span>
+          Centre status: TODO[CONFIRM hours]
+        </span>
+        <span class="text-white/70 text-sm">4th Floor, Silverstream House, 45 Fitzroy Street, London W1T 6EB</span>
+      </div>
+      <div class="flex gap-3">
+        <a href="/contact" class="btn-primary px-5 py-2.5 text-sm rounded-lg">Visit us</a>
+        <a href="/crisis" class="text-white/60 hover:text-white text-sm font-500 flex items-center gap-1 no-underline transition-colors">
+          Out of hours? →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Secondary needs -->
+  <section class="section-warm section-padding" aria-labelledby="secondary-heading">
+    <div class="container-max">
+      <div class="text-center mb-10">
+        <h2 id="secondary-heading" class="font-heading font-700 text-brand-black">Further support areas</h2>
+        <p class="text-black/60 mt-2 max-w-xl mx-auto">We support the whole person — not just the immediate presenting need.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {secondaryNeeds.map((item, i) => (
+          <a
+            href={item.href}
+            class="card group no-underline reveal"
+            style={`transition-delay: ${i * 75}ms`}
+            aria-label={`${item.title} — find support`}
+          >
+            <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors" aria-hidden="true">
+              <svg class="w-6 h-6 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d={item.icon} />
+              </svg>
+            </div>
+            <h3 class="font-heading font-700 text-brand-black text-h3-mobile mb-2 group-hover:text-gold-dark transition-colors">{item.title}</h3>
+            <p class="text-black/60 text-sm leading-relaxed flex-1">{item.desc}</p>
+            <span class="text-gold-dark font-600 text-sm mt-4 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+              Find support →
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Who we are -->
+  <section class="section-white section-padding" aria-labelledby="who-we-are-heading">
+    <div class="container-max max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 id="who-we-are-heading" class="font-heading font-700 text-brand-black heading-rule mb-6">Who we are</h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            CivDivCIC is a Community Interest Company (No. 13697459) based in Fitzrovia, London. We exist to ensure that every veteran — regardless of background, rank or service — can access the support they need and deserve.
+          </p>
+          <p class="text-black/70 leading-relaxed mb-4">
+            We operate as an engagement and signposting hub. We do not deliver clinical, medical or emergency services. What we do is listen, connect and follow through.
+          </p>
+          <p class="text-black/70 leading-relaxed mb-6">
+            We are proud to work in close partnership with the <strong>West Indian Association of Service Personnel (WASP)</strong>, honoring the long and often under-recognised service of Caribbean and Commonwealth veterans. Our heritage strand — delivered with WASP and the <strong>Windrush Foundation</strong> — ensures that history is preserved and celebrated alongside practical support.
+          </p>
+          <a href="/about" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex">About us →</a>
+        </div>
+        <!-- Image placeholder: interior shot of the centre or team — warm, welcoming environment -->
+        <div class="rounded-card overflow-hidden bg-warm-surface border border-black/[0.06] min-h-[280px] flex items-center justify-center" aria-hidden="true">
+          <span class="text-black/30 text-sm italic text-center px-8">Image placeholder: team or centre interior photograph — TODO[add image]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: How No Wrong Door works -->
+  <section class="bg-brand-black section-padding" aria-labelledby="nwd-heading">
+    <div class="container-max max-w-4xl">
+      <div class="text-center mb-10">
+        <h2 id="nwd-heading" class="font-heading font-700 text-white">How <span class="text-gold">No Wrong Door</span> works</h2>
+        <p class="text-white/60 mt-2 max-w-lg mx-auto">You don't need to know exactly what you need or who to ask. We figure that out together.</p>
+      </div>
+      <ol class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { step: '1', title: 'Reach out',     desc: 'Contact us any way you can — phone, email, in person, or through this website. Any entry point is a valid entry point.', icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72' },
+          { step: '2', title: 'We listen',      desc: 'We take time to understand your full picture — not just the immediate need. Every conversation is confidential and free from judgement.', icon: 'M3 18v-6a9 9 0 0 1 18 0v6 M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z' },
+          { step: '3', title: 'We connect you', desc: 'We match your needs to the right partner, make a warm introduction, and follow up to make sure the connection holds.', icon: 'M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2m5.66 0H14a2 2 0 0 1 2 2v3.34L21 7v10l-5-3.34' },
+        ].map((s, i) => (
+          <li class="reveal card-dark text-center rounded-card p-6" style={`transition-delay: ${i * 100}ms`}>
+            <div class="w-12 h-12 rounded-full bg-gold flex items-center justify-center font-heading font-800 text-brand-black text-xl mx-auto mb-4" aria-label={`Step ${s.step}`}>
+              {s.step}
+            </div>
+            <h3 class="font-heading font-600 text-white mb-3">{s.title}</h3>
+            <p class="text-white/60 text-sm leading-relaxed">{s.desc}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- SECTION 7: Partner logos strip -->
+  <section class="section-warm section-padding py-12" aria-labelledby="partners-heading">
+    <div class="container-max">
+      <h2 id="partners-heading" class="font-heading font-700 text-brand-black text-center mb-2">Our partners</h2>
+      <p class="text-black/60 text-center text-sm mb-8">Working together to make sure no veteran falls through the cracks.</p>
+      <div class="flex flex-wrap items-center justify-center gap-8 mb-8">
+        {[
+          { name: 'West Indian Association of Service Personnel (WASP)', href: 'https://www.wasp.org.uk' },
+          { name: 'Windrush Foundation',                                  href: '#TODO[CONFIRM]' },
+          { name: 'Building Heroes (Build Futures)',                      href: '#TODO[CONFIRM]' },
+        ].map(partner => (
+          <a
+            href={partner.href}
+            class="partner-logo border border-black/[0.08] rounded-card bg-white no-underline min-w-[160px] min-h-[80px]"
+            aria-label={partner.name}
+            rel="noopener noreferrer"
+            target={partner.href.startsWith('http') ? '_blank' : undefined}
+          >
+            <!-- Partner logo placeholder: replace with actual logo image -->
+            <span class="text-black/40 text-xs text-center px-3">{partner.name}</span>
+          </a>
+        ))}
+      </div>
+      <div class="text-center">
+        <a href="/partnerships" class="btn-secondary px-6 py-3 rounded-lg text-sm font-600 inline-flex">See all partnerships →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: Inclusion banner -->
+  <section class="bg-gold py-10 px-4 md:px-8" aria-label="Inclusion statement">
+    <div class="container-max text-center">
+      <p class="font-heading font-700 text-brand-black text-xl md:text-2xl leading-snug">
+        Support for all who served — including Commonwealth, Caribbean,<br class="hidden md:block" /> foreign national and Gurkha veterans.
+      </p>
+      <p class="text-brand-black/70 mt-3 text-sm">
+        Our No Wrong Door approach means everyone who contacts us receives a response, regardless of background or discharge status.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 9: Impact — qualitative, no invented statistics -->
+  <section class="section-white section-padding" aria-labelledby="impact-heading">
+    <div class="container-max max-w-4xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+        <h2 id="impact-heading" class="font-heading font-700 text-brand-black heading-rule">Our impact</h2>
+        <span class="text-sm text-black/50 italic bg-warm-surface px-3 py-1.5 rounded-full border border-black/[0.06]">Impact reporting in development</span>
+      </div>
+      <p class="text-black/70 leading-relaxed mb-6 max-w-2xl">
+        We are building our monitoring and evaluation framework. Rather than present unverified numbers, we are committed to sharing only evidence-based outcomes. The stories below represent the kinds of change we work towards.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {[
+          { title: 'Connected to the right service', desc: 'Veterans who reach us through any channel are matched to the most appropriate partner for their situation.' },
+          { title: 'Heritage preserved', desc: 'Working with WASP and Windrush Foundation to document and celebrate Caribbean and Commonwealth service histories.' },
+          { title: 'No dead ends', desc: 'Every referral receives a response. No veteran is turned away without being connected onward.' },
+        ].map((item, i) => (
+          <div class="reveal card" style={`transition-delay: ${i * 75}ms`}>
+            <div class="w-8 h-1 bg-gold rounded mb-4" aria-hidden="true"></div>
+            <h3 class="font-heading font-600 text-brand-black mb-2 text-h3-mobile">{item.title}</h3>
+            <p class="text-black/60 text-sm leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: Get involved -->
+  <section class="section-warm section-padding" aria-labelledby="get-involved-heading">
+    <div class="container-max max-w-4xl">
+      <h2 id="get-involved-heading" class="font-heading font-700 text-brand-black heading-rule mb-8">Get involved</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg class="w-6 h-6 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-700 text-brand-black mb-2">Volunteer with us</h3>
+          <p class="text-black/60 text-sm leading-relaxed mb-5 flex-1">
+            Share your time, skills or lived experience to support veterans in your community. No prior experience required — just a willingness to make a difference.
+          </p>
+          <a href="/get-involved" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex">Find out more →</a>
+        </div>
+
+        <div class="card">
+          <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg class="w-6 h-6 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-700 text-brand-black mb-2">Donate</h3>
+          <p class="text-black/60 text-sm leading-relaxed mb-5 flex-1">
+            Your support enables us to maintain our No Wrong Door commitment — ensuring every veteran who reaches out receives a thoughtful, personalised response.
+          </p>
+          <a href="/donate" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex">Donate →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

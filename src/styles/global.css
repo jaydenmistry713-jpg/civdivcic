@@ -1,0 +1,212 @@
+/* ============================================================
+   CivDivCIC Global Styles
+   Tailwind base + custom overrides
+   ============================================================ */
+
+/* --- Google Fonts — must appear BEFORE @tailwind directives --- */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Base reset -------------------------------------------- */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-body text-body text-brand-black bg-white antialiased;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  h1 { @apply text-h1-mobile md:text-h1-desktop; }
+  h2 { @apply text-h2-mobile md:text-h2-desktop; }
+  h3 { @apply text-h3-mobile md:text-h3-desktop; }
+
+  a {
+    @apply text-gold-dark underline underline-offset-2;
+    transition: color 150ms ease;
+  }
+  a:hover { @apply text-brand-black; }
+
+  /* Focus visible — gold outline for keyboard users */
+  :focus-visible {
+    outline: 3px solid #a6b84c;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Remove focus outline for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  img, video {
+    @apply max-w-full;
+  }
+
+  /* Ensure minimum tap target on interactive elements */
+  button, [role="button"], a, input, select, textarea {
+    min-height: 48px;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    min-height: unset;
+  }
+}
+
+/* --- Component layer --------------------------------------- */
+@layer components {
+
+  /* Skip to content link */
+  .skip-link {
+    @apply fixed top-0 left-0 z-[9999] bg-gold text-brand-black font-heading font-700 px-4 py-3 rounded-br-card;
+    transform: translateY(-100%);
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 font-body font-600 rounded-lg transition-all duration-150 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2;
+    min-height: 48px;
+    font-size: 1rem;
+  }
+  .btn-primary {
+    @apply btn bg-gold text-brand-black hover:bg-gold-tint active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply btn bg-transparent text-brand-black border-2 border-brand-black hover:bg-brand-black hover:text-white active:scale-[0.98];
+  }
+  .btn-secondary-light {
+    @apply btn bg-transparent text-white border-2 border-white hover:bg-white hover:text-brand-black active:scale-[0.98];
+  }
+  .btn-crisis {
+    @apply btn bg-crisis-red text-white hover:brightness-110 active:scale-[0.98];
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-card shadow-card bg-white border border-black/[0.06] p-6 flex flex-col;
+    transition: box-shadow 150ms ease, transform 150ms ease;
+  }
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .card-dark {
+    @apply rounded-card shadow-card-dark bg-black-800 border border-white/[0.06] p-6 flex flex-col;
+  }
+
+  /* Section bands */
+  .section-white   { @apply bg-white; }
+  .section-warm    { @apply bg-warm-surface; }
+  .section-dark    { @apply bg-brand-black; }
+  .section-padding { @apply py-16 px-4 md:px-8 lg:px-16; }
+  .container-max   { @apply max-w-7xl mx-auto; }
+
+  /* Gold rule accent under headings */
+  .heading-rule::after {
+    content: '';
+    @apply block w-12 h-1 bg-gold mt-3 mb-0;
+  }
+
+  /* Form elements */
+  .form-label {
+    @apply block text-sm font-600 text-brand-black mb-1;
+  }
+  .form-input {
+    @apply w-full border border-black/20 rounded-lg px-4 py-3 text-brand-black placeholder-black/40 focus:border-gold focus:ring-2 focus:ring-gold/20 transition;
+    min-height: 48px;
+    font-size: 1rem;
+  }
+  .form-input:invalid:not(:placeholder-shown) {
+    @apply border-crisis-red;
+  }
+  .form-textarea {
+    @apply form-input;
+    min-height: 120px;
+    resize: vertical;
+  }
+  .form-error {
+    @apply text-crisis-red text-small mt-1;
+  }
+
+  /* Partner logo container */
+  .partner-logo {
+    @apply flex items-center justify-center p-4 grayscale hover:grayscale-0 transition;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    @apply flex items-center gap-2 text-small text-black/60 font-500;
+  }
+  .breadcrumb a {
+    @apply text-gold-dark no-underline hover:underline;
+  }
+  .breadcrumb-sep { @apply text-black/30; }
+}
+
+/* --- Utility layer ----------------------------------------- */
+@layer utilities {
+
+  /* Numeric font-weight utilities — needed for @apply font-700 etc. in components */
+  .font-400 { font-weight: 400; }
+  .font-500 { font-weight: 500; }
+  .font-600 { font-weight: 600; }
+  .font-700 { font-weight: 700; }
+  .font-800 { font-weight: 800; }
+
+  /* Scroll animation — JS adds .visible class via IntersectionObserver */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .btn,
+    .card,
+    .skip-link,
+    * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Text colour utilities not covered by Tailwind defaults */
+  .text-gold        { color: #a6b84c; }
+  .text-gold-tint   { color: #c8d47a; }
+  .text-gold-dark   { color: #7a8a38; }
+  .text-crisis      { color: #C8102E; }
+  .text-open-green  { color: #2E7D5B; }
+
+  /* Accessible colour contrast note:
+     - Green (#a6b84c) on white FAILS WCAG AA at body size — NEVER use for body text on white.
+       Use gold-dark (#7a8a38) instead, or use black text with green accents.
+     - On dark surfaces use gold-tint (#c8d47a) for readable green text.
+     - Gold-dark (#7a8a38) on white passes AA at large/bold sizes.
+     - Green (#a6b84c) on #101113 (brand-black) passes AA at all sizes. */
+}

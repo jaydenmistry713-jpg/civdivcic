@@ -1,0 +1,52 @@
+---
+// Employment & Skills pathway (/pathways/employment)
+import PathwayLayout from '../../layouts/PathwayLayout.astro';
+---
+
+<PathwayLayout
+  title="Employment & Skills Support"
+  description="CivDivCIC connects veterans to employment and skills support — CV help, skills translation, employer connections and vocational training. No Wrong Door, London."
+  pathwayName="Employment & Skills"
+  icon="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+  iconLabel="Employment icon"
+  promise="We help veterans translate their military skills into civilian careers — and connect them to employers who understand service."
+  whatWeHelp={[
+    'CV writing support and interview preparation tailored to veterans',
+    'Translating military qualifications and experience into civilian equivalents',
+    'Connections to employers who value and actively recruit veterans',
+    'Vocational and construction skills training pathways',
+    'Self-employment and enterprise support for veteran entrepreneurs',
+    'Support for veterans facing barriers to employment (criminal records, health, housing instability)',
+  ]}
+  partnerCards={[
+    {
+      name: 'Building Heroes (Build Futures)',
+      description: 'CivDivCIC partner. Provides vocational construction skills training and employment pathways for veterans transitioning into civilian work.',
+      funded: false,
+      website: '#TODO[CONFIRM]',
+    },
+    {
+      name: 'Veterans\' Employment Transition Support (VETS)',
+      description: 'Government employment support programme for veterans. Provides skills assessments and connections to employment advisers.',
+      funded: false,
+      website: '#TODO[CONFIRM]',
+    },
+    {
+      name: 'Career Transition Partnership (CTP)',
+      description: 'The official MOD resettlement provider for serving personnel. Also provides post-discharge support for veterans.',
+      funded: false,
+      website: 'https://www.ctp.org.uk',
+    },
+    {
+      name: 'West Indian Association of Service Personnel (WASP)',
+      description: 'Supports Caribbean and Commonwealth veterans with employment navigation, including those who may face discrimination or lack of recognition of overseas service.',
+      funded: true,
+      website: 'https://www.wasp.org.uk',
+    },
+  ]}
+  relatedPathways={[
+    { name: 'Financial Guidance', href: '/pathways/financial', icon: 'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' },
+    { name: 'Housing', href: '/pathways/housing', icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10' },
+    { name: 'Welfare & Social Isolation', href: '/pathways/welfare', icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z' },
+  ]}
+/>

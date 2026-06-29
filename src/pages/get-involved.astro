@@ -1,0 +1,72 @@
+---
+// Get Involved (/get-involved)
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Get Involved"
+  description="Volunteer with CivDivCIC. Share your time, skills or lived experience to support veterans in your community. No Wrong Door — London."
+>
+
+  <section class="bg-brand-black section-padding py-14 md:py-20" aria-labelledby="get-involved-heading">
+    <div class="container-max max-w-3xl">
+      <h1 id="get-involved-heading" class="font-heading font-800 text-white heading-rule mb-6">Get Involved</h1>
+      <p class="text-white/70 text-lg leading-relaxed max-w-2xl">
+        CivDivCIC depends on the time, expertise and dedication of people who believe that every veteran deserves to be connected to the right support. There are several ways you can help.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-white section-padding" aria-labelledby="volunteer-heading">
+    <div class="container-max max-w-4xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div>
+          <h2 id="volunteer-heading" class="font-heading font-700 text-brand-black heading-rule mb-5">Volunteer</h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            We welcome volunteers from all backgrounds — veterans and non-veterans alike. Whether you can give a few hours a month or more, there is a role for you.
+          </p>
+          <ul class="space-y-3 mb-6">
+            {[
+              'Peer support and befriending',
+              'Administrative and office support',
+              'Event organisation and community outreach',
+              'Digital and communications',
+              'Professional skills (legal, financial, healthcare, HR)',
+              'Heritage documentation and oral history',
+            ].map(role => (
+              <li class="flex gap-3 items-start text-sm text-black/70">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {role}
+              </li>
+            ))}
+          </ul>
+          <a href="/contact" class="btn-primary px-6 py-3 rounded-lg text-sm font-600 inline-flex">Express interest →</a>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-700 text-brand-black heading-rule mb-5">Partner with us</h2>
+          <p class="text-black/70 leading-relaxed mb-4">
+            If your organisation supports veterans and shares our No Wrong Door values, we would like to hear from you. We are actively seeking partners across health, housing, employment and financial guidance.
+          </p>
+          <a href="/partnerships" class="btn-secondary px-6 py-3 rounded-lg text-sm font-600 inline-flex mb-4">View our partnerships</a>
+          <p class="text-black/60 text-sm mt-4">
+            To discuss a partnership, contact us at <a href="mailto:admin@civdivcic.org.uk" class="text-gold-dark hover:underline">admin@civdivcic.org.uk</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-warm section-padding py-12" aria-labelledby="donate-cta-heading">
+    <div class="container-max max-w-3xl text-center">
+      <h2 id="donate-cta-heading" class="font-heading font-700 text-brand-black heading-rule mb-4" style="display: inline-block;">Support our work financially</h2>
+      <p class="text-black/60 mb-6 max-w-md mx-auto">
+        Your donation enables us to maintain our No Wrong Door commitment — ensuring every veteran who contacts us receives a thoughtful, personalised response.
+      </p>
+      <a href="/donate" class="btn-primary px-8 py-4 rounded-lg font-600 inline-flex">Donate →</a>
+    </div>
+  </section>
+
+</BaseLayout>
